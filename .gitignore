@@ -2,6 +2,9 @@
 
 .idea
 
+# environment
+.env.development.sample
+
 # dependencies
 /node_modules
 /.pnp

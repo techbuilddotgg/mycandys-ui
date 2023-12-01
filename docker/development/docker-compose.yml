@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  next-deveolpment:
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    ports:
+      - '3000:3000'
