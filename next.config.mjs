@@ -1,6 +1,9 @@
+import './src/env.mjs';
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
   output: 'standalone',
 };
 
-module.exports = nextConfig;
+export default config;
+
