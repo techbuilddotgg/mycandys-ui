@@ -1,5 +1,5 @@
 'use client';
-import SearchForm from '@/components/page/SearchForm';
+import SearchForm from '@/components/page/home/SearchForm';
 import Card from '@/components/ui/Card';
 import Checkbox from '@/components/ui/Checkbox';
 import Marquee from '@/components/ui/Marquee';
@@ -25,10 +25,10 @@ export default function Home() {
         ]}
       />
 
-      <div className={'grid grid-cols-6 gap-20 mt-4'}>
+      <div className={'mt-4 grid grid-cols-6 gap-20'}>
         <aside
           className={
-            'col-span-1 p-2 rounded-md border-2 border-black bg-[#bc95d4] font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+            'col-span-1 rounded-md border-2 border-black bg-[#bc95d4] p-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
           }
         >
           <Checkbox item={'Gummy'} />
@@ -36,7 +36,7 @@ export default function Home() {
           <Checkbox item={'Lolipop'} />
         </aside>
         <div className={'col-span-5'}>
-          <div className={'flex flex-row flex-wrap w-full gap-4'}>
+          <div className={'flex w-full flex-row flex-wrap gap-4'}>
             <Card heading={'Haribo candy'} paragraph={'very good'} />
             <Card heading={'Chupachups lolipop'} paragraph={'very good'} />
             <Card heading={'Hubabba gum'} paragraph={'very good'} />

@@ -1,28 +1,17 @@
-import { Dispatch, SetStateAction } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 import { classnames } from '@/utils/classnames';
 
-type Props = {
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
-  placeholder: string;
-  className?: string;
-};
-
-export default function Input({ value, setValue, placeholder }: Props) {
+const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
   return (
     <input
+      ref={ref}
       className={classnames(
-        'w-[500px] p-[10px] rounded-md border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] outline-none transition-all focus:translate-x-[3px] focus:translate-y-[3px] focus:shadow-none',
+        'w-[500px] rounded-md border-2 border-black p-[10px] font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] outline-none transition-all focus:translate-x-[3px] focus:translate-y-[3px] focus:shadow-none',
+        props.className ?? '',
       )}
-      type="text"
-      name="text"
-      id="text"
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => {
-        setValue(e.target.value);
-      }}
-      aria-label={placeholder}
+      {...props}
     />
   );
-}
+});
+
+export default Input;

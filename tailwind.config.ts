@@ -4,6 +4,9 @@ const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      colors: {
+        primary: '#bc95d4',
+      },
       animation: {
         marquee: 'marquee 10s linear infinite',
         marquee2: 'marquee2 10s linear infinite',

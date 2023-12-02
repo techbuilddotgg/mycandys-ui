@@ -3,7 +3,7 @@
 .idea
 
 # environment
-.env.development.sample
+.env.development
 
 # dependencies
 /node_modules

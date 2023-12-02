@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Public_Sans } from 'next/font/google';
-import './globals.css';
 import Navbar from '@/components/ui/Navbar';
+import './globals.css';
 
 const publicSans = Public_Sans({ subsets: ['latin-ext'] });
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={publicSans.className}>
         <Navbar />
-        <main className="flex bg-white min-h-screen flex-col items-center p-24">{children}</main>
+        <main className="flex min-h-screen flex-col items-center bg-white p-24">{children}</main>
       </body>
     </html>
   );
