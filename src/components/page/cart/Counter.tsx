@@ -1,13 +1,15 @@
 import React, { MutableRefObject, useRef } from 'react';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import { classnames } from '@/utils/classnames';
 
 interface CounterProps {
   count: number;
   setCount: (prevCount: number) => void;
+  className?: string;
 }
 
-const Counter = ({ count, setCount }: CounterProps) => {
+const Counter = ({ count, setCount, className }: CounterProps) => {
   const ref = useRef() as MutableRefObject<HTMLInputElement>;
 
   const minusDisabled = count === 1;
@@ -24,8 +26,8 @@ const Counter = ({ count, setCount }: CounterProps) => {
   };
 
   return (
-    <div className={'flex flex-row gap-2'}>
-      <Button disabled={minusDisabled} className={'px-4'} onClick={handleDecrement}>
+    <div className={classnames('flex flex-row gap-2', className ?? '')}>
+      <Button disabled={minusDisabled} className={'w-[50px] px-4'} onClick={handleDecrement}>
         -
       </Button>
       <Input
@@ -33,9 +35,9 @@ const Counter = ({ count, setCount }: CounterProps) => {
         ref={ref}
         value={count}
         onChange={(e) => setCount(parseInt(e.target.value))}
-        className={'w-full'}
+        className={'w-[60px] p-2'}
       />
-      <Button disabled={plusDisabled} className={'px-4'} onClick={handleIncrement}>
+      <Button disabled={plusDisabled} className={'w-[50px] px-4'} onClick={handleIncrement}>
         +
       </Button>
     </div>

@@ -3,6 +3,11 @@ import { formatPrice } from '@/utils/price';
 import Button from '@/components/ui/Button';
 import { Item } from '@/models/cart';
 import CartItem from '@/components/page/cart/CartItem';
+import { useRouter } from 'next/navigation';
+import { Route } from '@/constants/routes';
+import Stepper from '@/components/ui/Stepper';
+import { useQueryParams } from '@/hooks/useQueryParams';
+import { useEffect } from 'react';
 
 const dummyData: Item[] = [
   {
@@ -31,19 +36,37 @@ const dummyData: Item[] = [
   },
 ];
 
-export default function Home() {
+export default function Cart() {
+  const router = useRouter();
+  const { updateQueryParams } = useQueryParams();
+
+  useEffect(() => {
+    updateQueryParams({ step: 1 });
+  }, []);
+
   return (
-    <div className={'w-full'}>
+    <div className={'flex w-full flex-col'}>
+      <div className={'m-auto'}>
+        <Stepper
+          steps={[
+            { name: 'CART', href: Route.CART },
+            { name: 'SHIPPING', href: Route.CHECKOUT },
+            {
+              name: 'FINISH',
+              href: '/',
+            },
+          ]}
+        />
+      </div>
       <h1 className={'m500:text-xl text-2xl font-bold'}>ITEMS IN CART</h1>
-      <div className={'m-8 flex w-full flex-row flex-wrap gap-4'}>
+      <div className={'my-8 flex w-full flex-row flex-wrap gap-2'}>
         {dummyData.map((item) => (
           <CartItem item={item} key={item.id} />
         ))}
-      </div>
-      <div className={'w-full border-b-4 border-black'} />
-      <div className={'mt-2 flex w-full flex-row justify-between'}>
-        <div className={'text-xl font-semibold'}>Price: {formatPrice(0)}</div>
-        <Button onClick={() => {}}>BUY</Button>
+        <div className={'flex w-full flex-row justify-between'}>
+          <div className={'text-xl font-semibold'}>Price: {formatPrice(0)}</div>
+          <Button onClick={() => router.push(Route.CHECKOUT)}>CHECKOUT</Button>
+        </div>
       </div>
     </div>
   );
