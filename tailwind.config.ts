@@ -6,6 +6,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#bc95d4',
+        secondary: '#C9DCD8',
       },
       animation: {
         marquee: 'marquee 10s linear infinite',

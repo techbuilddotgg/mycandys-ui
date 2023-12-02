@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={publicSans.className}>
         <Navbar />
-        <main className="flex min-h-screen flex-col items-center bg-white p-24">{children}</main>
+        <main className="bg-secondary flex min-h-screen flex-col items-center p-24">{children}</main>
       </body>
     </html>
   );

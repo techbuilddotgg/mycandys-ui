@@ -1,20 +1,47 @@
 'use client';
-
 import { formatPrice } from '@/utils/price';
-import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import { Item } from '@/models/cart';
+import CartItem from '@/components/page/cart/CartItem';
+
+const dummyData: Item[] = [
+  {
+    id: 1,
+    name: 'Haribo candy',
+    price: 100,
+    quantity: 1,
+    imgUrl:
+      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
+  },
+  {
+    id: 2,
+    name: 'Haribo candy',
+    price: 100,
+    quantity: 1,
+    imgUrl:
+      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
+  },
+  {
+    id: 3,
+    name: 'Haribo candy',
+    price: 100,
+    quantity: 1,
+    imgUrl:
+      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
+  },
+];
 
 export default function Home() {
   return (
     <div className={'w-full'}>
-      <h1 className={'text-2xl font-bold m500:text-xl'}>ITEMS IN CART</h1>
-      <div className={'flex flex-row flex-wrap w-full gap-4 m-8'}>
-        <Card heading={'Haribo candy'} paragraph={'very good'} />
-        <Card heading={'Chupachups lolipop'} paragraph={'very good'} />
-        <Card heading={'Hubabba gum'} paragraph={'very good'} />
+      <h1 className={'m500:text-xl text-2xl font-bold'}>ITEMS IN CART</h1>
+      <div className={'m-8 flex w-full flex-row flex-wrap gap-4'}>
+        {dummyData.map((item) => (
+          <CartItem item={item} key={item.id} />
+        ))}
       </div>
       <div className={'w-full border-b-4 border-black'} />
-      <div className={'flex flex-row justify-between w-full mt-2'}>
+      <div className={'mt-2 flex w-full flex-row justify-between'}>
         <div className={'text-xl font-semibold'}>Price: {formatPrice(0)}</div>
         <Button onClick={() => {}}>BUY</Button>
       </div>

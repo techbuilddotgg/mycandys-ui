@@ -37,9 +37,9 @@ export default function Home() {
         </aside>
         <div className={'col-span-5'}>
           <div className={'flex w-full flex-row flex-wrap gap-4'}>
-            <Card heading={'Haribo candy'} paragraph={'very good'} />
-            <Card heading={'Chupachups lolipop'} paragraph={'very good'} />
-            <Card heading={'Hubabba gum'} paragraph={'very good'} />
+            <Card heading={'Haribo candy'}>Hood </Card>
+            <Card heading={'Chupachups lolipop'}>Hood </Card>
+            <Card heading={'Hubabba gum'}>Hood </Card>
           </div>
         </div>
       </div>
