@@ -6,7 +6,7 @@ import { useQueryParams } from '@/hooks/useQueryParams';
 
 enum TabOptions {
   SIGN_IN = 'sign-in',
-  SIGN_UP = 'sing-up',
+  SIGN_UP = 'sign-up',
 }
 
 export default function Login() {

@@ -1,5 +1,5 @@
 export enum Route {
   CART = '/cart',
-  LOGIN = '/auth?tab=sing-in',
+  LOGIN = '/auth?tab=sign-in',
   HOME = '/',
 }
