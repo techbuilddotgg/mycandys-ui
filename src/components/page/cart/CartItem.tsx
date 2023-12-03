@@ -19,7 +19,7 @@ const CartItem = ({ item }: CartItemProps) => {
     //     <Counter count={count} setCount={setCount} />
     //   </div>
     // </Card>
-    <div className={'w-full border-b-4 border-black'}>
+    <div className={'w-full border-b-2 border-black'}>
       <div className={' my-4 flex flex-row'}>
         <Image src={item.imgUrl} alt={item.name} className={' rounded-md'} width={80} height={80} />
         <div className={'ml-4 flex flex-col gap-1'}>

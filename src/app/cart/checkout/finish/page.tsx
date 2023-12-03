@@ -29,6 +29,7 @@ const Finish = () => {
         />
       </div>
       <div className={'mt-40 flex w-fit flex-col items-center gap-2'}>
+        <div className={'my-1 text-6xl'}>🍭</div>
         <h1 className={'text-3xl font-bold'}>CONGRATULATIONS!</h1>
         <p>Your order is on your way.</p>
         <Button onClick={() => router.push(Route.HOME)}>BACK TO SHOP</Button>
