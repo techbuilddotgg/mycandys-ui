@@ -10,30 +10,30 @@ import { useQueryParams } from '@/hooks/useQueryParams';
 import { useEffect } from 'react';
 
 const dummyData: Item[] = [
-  // {
-  //   id: 1,
-  //   name: 'Haribo candy',
-  //   price: 100,
-  //   quantity: 1,
-  //   imgUrl:
-  //     'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-  // },
-  // {
-  //   id: 2,
-  //   name: 'Haribo candy',
-  //   price: 100,
-  //   quantity: 1,
-  //   imgUrl:
-  //     'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-  // },
-  // {
-  //   id: 3,
-  //   name: 'Haribo candy',
-  //   price: 100,
-  //   quantity: 1,
-  //   imgUrl:
-  //     'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-  // },
+  {
+    id: 1,
+    name: 'Haribo candy',
+    price: 100,
+    quantity: 1,
+    imgUrl:
+      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
+  },
+  {
+    id: 2,
+    name: 'Haribo candy',
+    price: 100,
+    quantity: 1,
+    imgUrl:
+      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
+  },
+  {
+    id: 3,
+    name: 'Haribo candy',
+    price: 100,
+    quantity: 1,
+    imgUrl:
+      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
+  },
 ];
 
 export default function Cart() {

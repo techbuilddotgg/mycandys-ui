@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Product } from '@/models/product';
 import Card from '@/components/ui/Card';
 import { formatPrice } from '@/utils/price';
+import Button from '@/components/ui/Button';
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +16,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="mt-1 flex flex-col justify-between gap-1">
         <div className="text-xl font-bold">{formatPrice(product.price)}</div>
       </div>
+      <Button className={'mt-2 w-full bg-emerald-300'}>ADD TO CART</Button>
     </Card>
   );
 };
