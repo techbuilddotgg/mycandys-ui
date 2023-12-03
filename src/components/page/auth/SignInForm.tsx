@@ -22,7 +22,7 @@ const SignInForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={'flex max-w-full flex-col gap-4 border-2 border-black bg-white p-5 font-bold'}
+      className={'flex max-w-full flex-col gap-4 rounded-b-md border-2 border-black bg-white p-5 font-bold'}
     >
       <Input {...register('email')} placeholder={'Email'} />
       <Input {...register('password')} placeholder={'Password'} type={'password'} />

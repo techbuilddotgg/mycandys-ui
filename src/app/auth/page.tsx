@@ -18,7 +18,7 @@ export default function Login() {
   };
 
   return (
-    <div className={'my-10'}>
+    <div className={'my-10 w-[500px]'}>
       <Tabs tabsArray={Object.values(TabOptions)} activeTab={activeTab} setActiveTab={handleChangeTab} />
       {
         {

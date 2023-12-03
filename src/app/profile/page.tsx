@@ -3,6 +3,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
+import { Order, OrderStatus } from '@/models/order';
+import OrdersTable from '@/components/page/profile/OrdersTable/OrdersTable';
 
 interface ProfileFormData {
   email: string;
@@ -12,6 +14,37 @@ interface ProfileFormData {
   city: string;
   country: string;
 }
+
+const dummy_data: Order[] = [
+  {
+    id: 1,
+    createdAt: '2021-09-01',
+    deliveryDate: '2021-09-05',
+    status: OrderStatus.Pending,
+    total: 100,
+  },
+  {
+    id: 2,
+    createdAt: '2021-09-01',
+    deliveryDate: '2021-09-05',
+    status: OrderStatus.Shipped,
+    total: 100,
+  },
+  {
+    id: 3,
+    createdAt: '2021-09-01',
+    deliveryDate: '2021-09-05',
+    status: OrderStatus.Delivered,
+    total: 100,
+  },
+  {
+    id: 4,
+    createdAt: '2021-09-01',
+    deliveryDate: '2021-09-05',
+    status: OrderStatus.Pending,
+    total: 100,
+  },
+];
 
 const Profile = () => {
   const { register } = useForm<ProfileFormData>({
@@ -43,6 +76,9 @@ const Profile = () => {
         <Input {...register('city')} placeholder={'City'} />
         <Button>SAVE</Button>
       </form>
+      <div className={'mt-10'}>
+        <OrdersTable orders={dummy_data} />
+      </div>
     </div>
   );
 };

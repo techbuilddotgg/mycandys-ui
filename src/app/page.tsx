@@ -59,25 +59,29 @@ export default function Home() {
       <div className={'my-4'}>
         <SearchForm />
       </div>
-      <Marquee
-        items={[
-          'Gummy',
-          'Chocolate',
-          'Lolipop',
-          'Sour candy',
-          'PRIME',
-          'Gummy',
-          'Chocolate',
-          'Lolipop',
-          'Sour candy',
-          'PRIME',
-        ]}
-      />
-
-      <div className={'mt-4 grid grid-cols-6 gap-20'}>
+      <div className={'grid w-full grid-cols-1'}>
+        <div className={'col-span-1'}>
+          <Marquee
+            items={[
+              'Gummy',
+              'Chocolate',
+              'Lolipop',
+              'Sour candy',
+              'PRIME',
+              'Acid',
+              'Coke',
+              'Pills',
+              'Marry Jane',
+              'Edibles',
+              'GummyBears',
+            ]}
+          />
+        </div>
+      </div>
+      <div className={'mt-4 grid w-full grid-cols-6 gap-10'}>
         <aside
           className={
-            'col-span-1 h-fit rounded-md border-2 border-black bg-[#bc95d4] p-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+            'col-span-1 h-fit rounded-md border-2 border-black bg-primary p-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
           }
         >
           <Checkbox item={'Gummy'} />
@@ -85,7 +89,7 @@ export default function Home() {
           <Checkbox item={'Lolipop'} />
         </aside>
         <div className={'col-span-5'}>
-          <div className={'flex w-full flex-row flex-wrap gap-4'}>
+          <div className={'flex w-full flex-row flex-wrap justify-end gap-4'}>
             {dummyData.map((product) => (
               <ProductCard product={product} key={product.id} />
             ))}

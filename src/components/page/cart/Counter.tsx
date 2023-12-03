@@ -26,7 +26,7 @@ const Counter = ({ count, setCount, className }: CounterProps) => {
   };
 
   return (
-    <div className={classnames('flex flex-row gap-2', className ?? '')}>
+    <div className={classnames('flex w-[180px] flex-row gap-2', className ?? '')}>
       <Button disabled={minusDisabled} className={'w-[50px] px-4'} onClick={handleDecrement}>
         -
       </Button>
@@ -35,7 +35,7 @@ const Counter = ({ count, setCount, className }: CounterProps) => {
         ref={ref}
         value={count}
         onChange={(e) => setCount(parseInt(e.target.value))}
-        className={'w-[60px] p-2'}
+        className={'w-fit p-2'}
       />
       <Button disabled={plusDisabled} className={'w-[50px] px-4'} onClick={handleIncrement}>
         +

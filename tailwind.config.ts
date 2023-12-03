@@ -9,8 +9,8 @@ const config: Config = {
         secondary: '#C9DCD8',
       },
       animation: {
-        marquee: 'marquee 10s linear infinite',
-        marquee2: 'marquee2 10s linear infinite',
+        marquee: 'marquee 15s linear infinite',
+        marquee2: 'marquee2 15s linear infinite',
       },
       keyframes: {
         marquee: {
