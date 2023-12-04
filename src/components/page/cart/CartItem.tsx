@@ -23,7 +23,7 @@ const CartItem = ({ item }: CartItemProps) => {
         </div>
         <div className={'ml-auto flex items-center gap-2'}>
           <Counter count={count} setCount={setCount} />
-          <Button className={'h-[48px] w-[48px] bg-red-500'}>X</Button>
+          <Button className={'h-[48px] w-[48px] bg-red-400'}>X</Button>
         </div>
       </div>
     </div>

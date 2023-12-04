@@ -1,3 +1,5 @@
-export const classnames = (...args: string[]) => {
-  return args.filter(Boolean).join(' ');
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+export const classnames = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
 };

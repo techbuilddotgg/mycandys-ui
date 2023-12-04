@@ -27,7 +27,7 @@ const Counter = ({ count, setCount, className }: CounterProps) => {
 
   return (
     <div className={classnames('flex flex-row gap-2', className ?? '')}>
-      <Button disabled={minusDisabled} className={'h-[48px] w-[48px] px-4'} onClick={handleDecrement}>
+      <Button disabled={minusDisabled} className={'h-[48px] w-[48px] bg-emerald-300 px-4'} onClick={handleDecrement}>
         -
       </Button>
       <Input
@@ -37,7 +37,7 @@ const Counter = ({ count, setCount, className }: CounterProps) => {
         onChange={(e) => setCount(parseInt(e.target.value))}
         className={'w-[80px] p-2'}
       />
-      <Button disabled={plusDisabled} className={'h-[48px] w-[48px] px-4'} onClick={handleIncrement}>
+      <Button disabled={plusDisabled} className={'h-[48px] w-[48px] bg-emerald-300 px-4'} onClick={handleIncrement}>
         +
       </Button>
     </div>

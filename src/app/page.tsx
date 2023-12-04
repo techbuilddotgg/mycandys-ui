@@ -56,7 +56,7 @@ const dummyData: Product[] = [
 export default function Home() {
   return (
     <>
-      <div className={'my-4'}>
+      <div className={'my-4 flex w-full flex-row justify-center'}>
         <SearchForm />
       </div>
       <div className={'grid w-full grid-cols-1'}>
@@ -88,8 +88,8 @@ export default function Home() {
           <Checkbox item={'Chocolate'} />
           <Checkbox item={'Lolipop'} />
         </aside>
-        <div className={'col-span-5'}>
-          <div className={'flex w-full flex-row flex-wrap justify-end gap-4'}>
+        <div className={'col-span-5 grid'}>
+          <div className={'flex w-full flex-row flex-wrap gap-4'}>
             {dummyData.map((product) => (
               <ProductCard product={product} key={product.id} />
             ))}
