@@ -42,7 +42,7 @@ export default function Cart() {
 
   useEffect(() => {
     updateQueryParams({ step: 1 });
-  }, []);
+  }, [updateQueryParams]);
 
   return (
     <div className={'flex w-full flex-col'}>
@@ -65,7 +65,7 @@ export default function Cart() {
         }
       >
         {dummyData.length === 0 && (
-          <div className={'text-xl font-semibold'}>Looks like you don't any items in your 🛒</div>
+          <div className={'text-xl font-semibold'}>Looks like you don&apos;t any items in your 🛒</div>
         )}
         <Button className={'ml-auto bg-red-400'}>CLEAR CART</Button>
         {dummyData.map((item) => (

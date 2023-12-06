@@ -12,7 +12,7 @@ const Finish = () => {
 
   useEffect(() => {
     updateQueryParams({ step: 3 });
-  }, []);
+  }, [updateQueryParams]);
 
   return (
     <div className={'flex w-full flex-col items-center'}>

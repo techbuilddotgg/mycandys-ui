@@ -24,7 +24,7 @@ const Checkout = () => {
 
   useEffect(() => {
     updateQueryParams({ step: 2 });
-  }, []);
+  }, [updateQueryParams]);
 
   const { register } = useForm<CheckoutFormData>({
     defaultValues: {

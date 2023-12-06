@@ -59,41 +59,37 @@ export default function Home() {
       <div className={'my-4 flex w-full flex-row justify-center'}>
         <SearchForm />
       </div>
-      <div className={'grid w-full grid-cols-1'}>
-        <div className={'col-span-1'}>
-          <Marquee
-            items={[
-              'Gummy',
-              'Chocolate',
-              'Lolipop',
-              'Sour candy',
-              'PRIME',
-              'Acid',
-              'Coke',
-              'Pills',
-              'Marry Jane',
-              'Edibles',
-              'GummyBears',
-            ]}
-          />
-        </div>
+      <div className={'flex w-full'}>
+        <Marquee
+          items={[
+            'Gummy',
+            'Chocolate',
+            'Lolipop',
+            'Sour candy',
+            'PRIME',
+            'Acid',
+            'Coke',
+            'Pills',
+            'Marry Jane',
+            'Edibles',
+            'GummyBears',
+          ]}
+        />
       </div>
-      <div className={'mt-4 grid w-full grid-cols-6 gap-10'}>
+      <div className={'mt-4 flex w-full flex-row gap-10'}>
         <aside
           className={
-            'col-span-1 h-fit rounded-md border-2 border-black bg-primary p-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+            'h-fit rounded-md border-2 border-black bg-primary p-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
           }
         >
           <Checkbox item={'Gummy'} />
           <Checkbox item={'Chocolate'} />
           <Checkbox item={'Lolipop'} />
         </aside>
-        <div className={'col-span-5 grid'}>
-          <div className={'flex w-full flex-row flex-wrap gap-4'}>
-            {dummyData.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
-          </div>
+        <div className={'flex w-full flex-row flex-wrap gap-4'}>
+          {dummyData.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
         </div>
       </div>
     </>
