@@ -27,7 +27,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-ENV NEXT_PUBLIC_BACKEND_URL "0.0.0.0"
+ENV NEXT_PUBLIC_BACKEND_URL "http://localhost:8000"
 
 RUN yarn build
 
