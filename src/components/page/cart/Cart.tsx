@@ -4,13 +4,14 @@ import Button from '@/components/ui/Button';
 import CartItem from '@/components/page/cart/CartItem';
 import { formatPrice } from '@/utils/price';
 import { Route } from '@/constants/routes';
-import { router } from 'next/client';
 import { useCart, useClearCart } from '@/hooks/useCart';
 import Loading from '@/components/ui/Loading';
+import { useRouter } from 'next/navigation';
 
 const Cart = () => {
   const { data: cart, isLoading } = useCart('6572327e911ee43f8c3817be');
   const clearCart = useClearCart();
+  const router = useRouter();
 
   return (
     <>
