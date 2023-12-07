@@ -1,3 +1,4 @@
+'use client';
 export default function Marquee({ items }: { items: string[] }) {
   return (
     <div className="relative flex w-full overflow-x-hidden rounded-md border-2 border-black bg-white font-bold">

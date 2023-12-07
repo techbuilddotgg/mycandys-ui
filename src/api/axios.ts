@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { env } from '@/env.mjs';
+import { retrieveSession } from '@/utils/session';
 
 export const api = axios.create({
   baseURL: env.NEXT_PUBLIC_BACKEND_URL,
@@ -9,6 +10,11 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  const session = retrieveSession();
+
+  if (session) {
+    config.headers.Authorization = `Bearer ${session.accessToken}`;
+  }
+
   return config;
 });

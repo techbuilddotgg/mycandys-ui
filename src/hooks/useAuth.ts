@@ -1,12 +1,19 @@
-import { useMutation, UseMutationOptions } from 'react-query';
-import { login, logout } from '@/api/auth';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { login, logout, register } from '@/api/auth';
 import { AxiosError } from 'axios';
-import { LoginRequest, LoginResponse } from '@/models/auth';
+import {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from '@/models/auth';
 
 const LOGIN_MUTATION_KEY = 'login';
-export const useLogin = (opts?: UseMutationOptions<LoginResponse, AxiosError, LoginRequest, unknown>) => {
+export const useLogin = (
+  opts?: UseMutationOptions<LoginResponse, AxiosError, LoginRequest, unknown>,
+) => {
   return useMutation({
-    mutationKey: LOGIN_MUTATION_KEY,
+    mutationKey: [LOGIN_MUTATION_KEY],
     mutationFn: login,
     ...opts,
   });
@@ -15,8 +22,24 @@ export const useLogin = (opts?: UseMutationOptions<LoginResponse, AxiosError, Lo
 const LOGOUT_MUTATION_KEY = 'logout';
 const useLogout = (opts?: UseMutationOptions<{}, AxiosError, {}, unknown>) => {
   return useMutation({
-    mutationKey: LOGOUT_MUTATION_KEY,
+    mutationKey: [LOGOUT_MUTATION_KEY],
     mutationFn: logout,
+    ...opts,
+  });
+};
+
+const REGISTER_MUTATION_KEY = 'register';
+export const useRegisterUser = (
+  opts?: UseMutationOptions<
+    RegisterResponse,
+    AxiosError,
+    RegisterRequest,
+    unknown
+  >,
+) => {
+  return useMutation({
+    mutationKey: [REGISTER_MUTATION_KEY],
+    mutationFn: register,
     ...opts,
   });
 };

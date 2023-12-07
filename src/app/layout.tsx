@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Public_Sans } from 'next/font/google';
 import Navbar from '@/components/ui/Navbar';
 import './globals.css';
-import Provider from '@/components/providers/Provider';
+import Providers from '@/components/providers/Providers';
 
 const publicSans = Public_Sans({ subsets: ['latin-ext'] });
 
@@ -16,10 +16,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={publicSans.className}>
-        <Provider>
+        <Providers>
           <Navbar />
-          <main className="flex min-h-screen flex-col items-center bg-secondary p-24 pb-10">{children}</main>
-        </Provider>
+          <main className="flex min-h-screen flex-col items-center bg-secondary p-24 pb-10">
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );

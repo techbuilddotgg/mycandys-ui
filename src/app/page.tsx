@@ -1,96 +1,37 @@
 'use client';
 import SearchForm from '@/components/page/home/SearchForm';
-import Checkbox from '@/components/ui/Checkbox';
 import Marquee from '@/components/ui/Marquee';
-import { Product } from '@/models/product';
-import ProductCard from '@/components/page/home/ProductCard';
+import ProductList from '@/components/page/home/ProductList';
+import { useProducts } from '@/hooks/useProducts';
+import ProductFilter from '@/components/page/home/ProductFilter';
 
-const dummyData: Product[] = [
-  {
-    id: '1',
-    name: 'Haribo candy',
-    price: 100,
-    imgUrl:
-      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl.',
-  },
-  {
-    id: '12',
-    name: 'Haribo candy',
-    price: 100,
-    imgUrl:
-      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl.',
-  },
-  {
-    id: '112',
-    name: 'Haribo candy',
-    price: 100,
-    imgUrl:
-      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl.',
-  },
-  {
-    id: '122',
-    name: 'Haribo candy',
-    price: 100,
-    imgUrl:
-      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl.',
-  },
-  {
-    id: '13',
-    name: 'Haribo candy',
-    price: 100,
-    imgUrl:
-      'https://monpanierlatin.co.uk/cdn/shop/products/Sanstitre_638731a3-9fe9-4d12-9640-b09600bd8a78_9_480x480.png?v=1649837048',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl. Nulla euismod, nisl eget ultricies aliquam, nisl nisl lacinia nisl, vitae aliquam nisl nisl vitae nisl.',
-  },
+const carouselItems = [
+  'Lollipops',
+  'Chocolate',
+  'Gummy Bears',
+  'Bubble Gum',
+  'Sour',
+  'Soda',
+  'Caramel',
+  'Chips',
+  'Haribor',
+  'Snickers',
 ];
 
 export default function Home() {
+  const { data } = useProducts();
+
   return (
     <>
-      <div className={'my-4 flex w-full flex-row justify-center'}>
+      <div className={' my-4  flex w-full'}>
+        <Marquee items={carouselItems} />
+      </div>
+      <div className={'my-2 flex w-full flex-row justify-center'}>
         <SearchForm />
       </div>
-      <div className={'flex w-full'}>
-        <Marquee
-          items={[
-            'Gummy',
-            'Chocolate',
-            'Lolipop',
-            'Sour candy',
-            'PRIME',
-            'Acid',
-            'Coke',
-            'Pills',
-            'Marry Jane',
-            'Edibles',
-            'GummyBears',
-          ]}
-        />
-      </div>
       <div className={'mt-4 flex w-full flex-row gap-10'}>
-        <aside
-          className={
-            'h-fit rounded-md border-2 border-black bg-primary p-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-          }
-        >
-          <Checkbox item={'Gummy'} />
-          <Checkbox item={'Chocolate'} />
-          <Checkbox item={'Lolipop'} />
-        </aside>
-        <div className={'flex w-full flex-row flex-wrap gap-4'}>
-          {dummyData.map((product) => (
-            <ProductCard product={product} key={product.id} />
-          ))}
-        </div>
+        <ProductFilter />
+        <ProductList products={data} />
       </div>
     </>
   );
