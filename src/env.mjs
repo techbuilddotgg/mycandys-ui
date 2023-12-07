@@ -12,5 +12,6 @@ export const env = createEnv({
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY,
-  }
+  },
+  skipValidation: process.env.NODE_ENV === 'production',
 });
