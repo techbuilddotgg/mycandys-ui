@@ -7,6 +7,7 @@ import Counter from '@/components/page/cart/Counter';
 import Button from '@/components/ui/Button';
 import { CART_QUERY_KEY, useRemoveFromCart } from '@/hooks/useCart';
 import { useQueryClient } from '@tanstack/react-query';
+import { it } from 'node:test';
 
 interface CartItemProps {
   item: Item;
@@ -15,10 +16,11 @@ interface CartItemProps {
 
 const CartItem = ({ item, cartId }: CartItemProps) => {
   const queryClient = useQueryClient();
-  const removeItem = useRemoveFromCart({
+
+  const removeItem = useRemoveFromCart(cartId, item.productId, {
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [CART_QUERY_KEY, cartId],
+        queryKey: [CART_QUERY_KEY, '6572327e911ee43f8c3817be'],
       });
     },
   });

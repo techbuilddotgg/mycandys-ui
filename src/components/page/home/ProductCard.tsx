@@ -26,7 +26,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
       />
       <div className="mt-1 flex flex-col justify-between gap-1">
         <div className="text-xl font-bold">
-          {formatPrice(product.temporaryPrice)}
+          {formatPrice(
+            product.temporaryPrice > 0
+              ? product.temporaryPrice
+              : product.originalPrice,
+          )}
         </div>
       </div>
       <Button

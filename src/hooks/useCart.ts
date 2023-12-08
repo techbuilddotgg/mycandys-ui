@@ -46,6 +46,8 @@ export const useAddToCart = (
 
 const REMOVE_FROM_CART_MUTATION_KEY = 'remove-from-cart';
 export const useRemoveFromCart = (
+  cartId: string,
+  productId: string,
   opts?: UseMutationOptions<
     {},
     AxiosError,
@@ -56,7 +58,7 @@ export const useRemoveFromCart = (
   >,
 ) => {
   return useMutation({
-    mutationKey: [REMOVE_FROM_CART_MUTATION_KEY],
+    mutationKey: [REMOVE_FROM_CART_MUTATION_KEY, cartId, productId],
     mutationFn: ({ cartId, productId }) =>
       removeItemsFromCart(cartId, productId),
     ...opts,

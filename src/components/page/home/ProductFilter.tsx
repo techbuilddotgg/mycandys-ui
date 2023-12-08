@@ -1,4 +1,3 @@
-'use client';
 import RadioGroup from '@/components/ui/RadioGroup';
 import { useCategories } from '@/hooks/useProducts';
 
