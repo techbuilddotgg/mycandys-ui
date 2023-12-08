@@ -1,7 +1,7 @@
 import { getProductCategories, getProducts, getSearchProducts } from '@/api/products';
 import { Product } from '@/models/product';
 import { AxiosError } from 'axios';
-import { QueryKey, useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export const PRODUCTS_QUERY_KEY = 'products';
 export const useProducts = (

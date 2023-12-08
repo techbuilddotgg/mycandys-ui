@@ -21,7 +21,7 @@ const carouselItems = [
 
 export default function Home() {
   const { data } = useProducts();
-  const { urlQuery, updateQueryParams } = useQueryParams();
+  const { urlQuery } = useQueryParams();
   const query = urlQuery.search as string
   const { data: filteredData } = useSearchProducts(query, {
     queryKey: [SEARCH_PRODUCTS_QUERY_KEY, query],
