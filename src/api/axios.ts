@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { env } from '@/env.mjs';
-import { retrieveSession } from '@/utils/session';
+import { getSession } from '@/utils/session';
 
 export const api = axios.create({
   baseURL: env.NEXT_PUBLIC_BACKEND_URL,
@@ -10,7 +10,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const session = retrieveSession();
+  const session = getSession();
 
   if (session) {
     config.headers.Authorization = `Bearer ${session.accessToken}`;

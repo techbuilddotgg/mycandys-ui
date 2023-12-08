@@ -1,5 +1,4 @@
 'use client';
-import { Session } from 'inspector';
 import {
   createContext,
   ReactNode,
@@ -7,7 +6,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useRouter } from 'next/navigation';
+import { getSession, removeCookieSession } from '@/utils/session';
+import { Session } from '@/utils/session';
 
 type SessionContextType = {
   session: Session | null;
@@ -28,12 +28,17 @@ export const SessionProvider = ({
   children: ReactNode;
   session?: Session;
 }) => {
-  const { push } = useRouter();
   const [session, setSession] = useState<Session | null>(
     _session ? _session : null,
   );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const cookie = getSession();
+
+    if (cookie) {
+      setSession(cookie);
+    }
+  }, []);
 
   const value: SessionContextType = {
     session,
@@ -42,6 +47,7 @@ export const SessionProvider = ({
     },
     remove: () => {
       setSession(null);
+      removeCookieSession();
     },
   };
 

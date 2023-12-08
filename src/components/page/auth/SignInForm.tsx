@@ -6,7 +6,8 @@ import Button from '@/components/ui/Button';
 import { useLogin } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { Route } from '@/constants/routes';
-import { env } from '@/env.mjs';
+import { useSession } from '@/components/providers/SessionProvider';
+import { getSession, Session } from '@/utils/session';
 
 interface SignInFormData {
   email: string;
@@ -24,9 +25,12 @@ const SignInForm = () => {
     defaultValues,
   });
 
+  const { update } = useSession();
+
   const { mutateAsync } = useLogin({
     onSuccess: () => {
       push(Route.HOME);
+      update(getSession() as Session);
     },
   });
 

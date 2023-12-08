@@ -4,4 +4,5 @@ export enum Route {
   HOME = '/',
   CHECKOUT = '/cart/checkout',
   FINISH = '/cart/checkout/finish',
+  PROFILE = '/profile',
 }
