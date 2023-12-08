@@ -7,6 +7,7 @@ import { Product } from '@/models/product';
 import Card from '@/components/ui/Card';
 import { formatPrice } from '@/utils/price';
 import Button from '@/components/ui/Button';
+import { classnames } from '@/utils/classnames';
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +15,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { mutateAsync } = useAddToCart();
+  const isDiscounted = product.temporaryPrice > 0;
 
   return (
     <Card heading={product.name}>
@@ -24,14 +26,20 @@ const ProductCard = ({ product }: ProductCardProps) => {
         width={300}
         height={300}
       />
-      <div className="mt-1 flex flex-col justify-between gap-1">
-        <div className="text-xl font-bold">
-          {formatPrice(
-            product.temporaryPrice > 0
-              ? product.temporaryPrice
-              : product.originalPrice,
+      <div className="my-2 mt-1 flex flex-row gap-2">
+        <div
+          className={classnames(
+            'text-xl font-bold',
+            isDiscounted ? 'line-through decoration-red-500' : '',
           )}
+        >
+          {formatPrice(product.originalPrice)}
         </div>
+        {isDiscounted && (
+          <div className={'text-xl font-bold'}>
+            {formatPrice(product.temporaryPrice)}
+          </div>
+        )}
       </div>
       <Button
         onClick={async () =>
