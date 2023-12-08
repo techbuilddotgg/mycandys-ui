@@ -1,8 +1,9 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { APIRoute } from '@/api/routes';
 import { User } from '@/models/user';
+import { api } from '@/api/axios';
 
-export const getUser = async (id: string) => {
-  const { data } = (await axios.get(`${APIRoute.USERS}/${id}`)) as AxiosResponse<User>;
+export const getUser = async () => {
+  const { data } = (await api.get(`${APIRoute.USERS}`)) as AxiosResponse<User>;
   return data;
 };
