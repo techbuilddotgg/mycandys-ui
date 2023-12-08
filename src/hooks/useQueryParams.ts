@@ -4,6 +4,7 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 interface URLQueryParams {
   tab?: string;
   step?: number;
+  search?: string;
 }
 
 export const useQueryParams = () => {
@@ -37,6 +38,7 @@ export const useQueryParams = () => {
     return {
       tab: query.get('tab'),
       step: parseInt(query.get('step') || '0'),
+      search: query.get('search'),
     };
   };
 

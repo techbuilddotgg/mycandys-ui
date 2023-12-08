@@ -2,8 +2,9 @@
 import SearchForm from '@/components/page/home/SearchForm';
 import Marquee from '@/components/ui/Marquee';
 import ProductList from '@/components/page/home/ProductList';
-import { useProducts } from '@/hooks/useProducts';
+import { SEARCH_PRODUCTS_QUERY_KEY, useProducts, useSearchProducts } from '@/hooks/useProducts';
 import ProductFilter from '@/components/page/home/ProductFilter';
+import { useQueryParams } from '@/hooks/useQueryParams';
 
 const carouselItems = [
   'Lollipops',
@@ -20,6 +21,11 @@ const carouselItems = [
 
 export default function Home() {
   const { data } = useProducts();
+  const { urlQuery, updateQueryParams } = useQueryParams();
+  const query = urlQuery.search as string
+  const { data: filteredData } = useSearchProducts(query, {
+    queryKey: [SEARCH_PRODUCTS_QUERY_KEY, query],
+  });
 
   return (
     <>
@@ -31,7 +37,7 @@ export default function Home() {
       </div>
       <div className={'mt-4 flex w-full flex-row gap-10'}>
         <ProductFilter />
-        <ProductList products={data} />
+        <ProductList products={query ? filteredData : data} />
       </div>
     </>
   );
