@@ -4,6 +4,8 @@ export interface Item {
   imgUrl: string;
   price: number;
   quantity: number;
+  description: string;
+  category: string;
 }
 
 export interface Cart {

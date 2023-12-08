@@ -22,6 +22,8 @@ const dummy_data: Order[] = [
     deliveryDate: '2021-09-05',
     status: OrderStatus.Pending,
     total: 100,
+    cart: [],
+    address: '',
   },
   {
     id: 2,
@@ -29,6 +31,8 @@ const dummy_data: Order[] = [
     deliveryDate: '2021-09-05',
     status: OrderStatus.Shipped,
     total: 100,
+    cart: [],
+    address: '',
   },
   {
     id: 3,
@@ -36,6 +40,8 @@ const dummy_data: Order[] = [
     deliveryDate: '2021-09-05',
     status: OrderStatus.Delivered,
     total: 100,
+    cart: [],
+    address: '',
   },
   {
     id: 4,
@@ -43,6 +49,8 @@ const dummy_data: Order[] = [
     deliveryDate: '2021-09-05',
     status: OrderStatus.Pending,
     total: 100,
+    cart: [],
+    address: '',
   },
 ];
 
