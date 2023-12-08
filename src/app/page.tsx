@@ -14,7 +14,7 @@ const carouselItems = [
   'Soda',
   'Caramel',
   'Chips',
-  'Haribor',
+  'Haribo',
   'Snickers',
 ];
 
