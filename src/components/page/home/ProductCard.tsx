@@ -1,6 +1,5 @@
+'use client';
 import { useAddToCart } from '@/hooks/useCart';
-
-('client');
 import React from 'react';
 import Image from 'next/image';
 import { Product } from '@/models/product';
