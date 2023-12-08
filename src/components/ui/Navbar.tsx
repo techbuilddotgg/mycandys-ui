@@ -18,7 +18,7 @@ export default function Navbar() {
         <div className={'ml-auto flex h-fit flex-row gap-4'}>
           {session && (
             <Link href={Route.PROFILE}>
-              <Avatar />
+              <Avatar className={'h-12 w-12'} />
             </Link>
           )}
 

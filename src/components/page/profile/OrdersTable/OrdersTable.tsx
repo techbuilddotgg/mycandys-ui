@@ -14,9 +14,6 @@ const OrdersTable = ({ orders }: OrdersTableProps) => {
       <h1 className={'my-2 text-3xl font-bold'}>ORDERS</h1>
       <table className={styles.table}>
         <thead>
-          {/*<tr>*/}
-          {/*  <th colSpan={5}>ORDERS</th>*/}
-          {/*</tr>*/}
           <tr>
             <th className={'p-3'}>Order ID</th>
             <th className={'p-3'}>Order Date</th>
@@ -26,17 +23,27 @@ const OrdersTable = ({ orders }: OrdersTableProps) => {
           </tr>
         </thead>
         <tbody className={' font-semibold'}>
-          {orders.map((order) => (
-            <tr key={order.id} className={''}>
-              <td className={'p-3'}>{order.id}</td>
-              <td className={'p-3'}>{order.createdAt}</td>
-              <td className={'p-3'}>{order.deliveryDate}</td>
-              <td className={'p-3'}>
-                <OrderStatusBadge status={order.status} />
+          {orders.length === 0 ? (
+            <tr>
+              <td colSpan={5} className={'h-32 text-center'}>
+                <h1 className={'text-2xl font-bold'}>No orders yet</h1>
               </td>
-              <td className={'p-3'}>{formatPrice(order.total)}</td>
             </tr>
-          ))}
+          ) : (
+            <>
+              {orders.map((order) => (
+                <tr key={order.id} className={''}>
+                  <td className={'p-3'}>{order.id}</td>
+                  <td className={'p-3'}>{order.createdAt}</td>
+                  <td className={'p-3'}>{order.deliveryDate}</td>
+                  <td className={'p-3'}>
+                    <OrderStatusBadge status={order.status} />
+                  </td>
+                  <td className={'p-3'}>{formatPrice(order.total)}</td>
+                </tr>
+              ))}
+            </>
+          )}
         </tbody>
       </table>
     </>
