@@ -78,6 +78,8 @@ export const useClearCart = (
 
 const UPDATE_PRODUCT_QUANTITY_MUTATION_KEY = 'update-product-quantity';
 export const useUpdateProductQuantity = (
+  cartId: string,
+  productId: string,
   opts?: UseMutationOptions<
     {},
     AxiosError,
@@ -89,7 +91,7 @@ export const useUpdateProductQuantity = (
   >,
 ) => {
   return useMutation({
-    mutationKey: [UPDATE_PRODUCT_QUANTITY_MUTATION_KEY],
+    mutationKey: [UPDATE_PRODUCT_QUANTITY_MUTATION_KEY, cartId, productId],
     mutationFn: ({ productId, cartId, quantity }) =>
       updateProductQuantity(cartId, productId, quantity),
     ...opts,

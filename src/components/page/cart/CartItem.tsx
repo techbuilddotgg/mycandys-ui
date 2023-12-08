@@ -1,13 +1,15 @@
 'use client';
-import React, { useState } from 'react';
 import Image from 'next/image';
 import { Item } from '@/models/cart';
 import { formatPrice } from '@/utils/price';
 import Counter from '@/components/page/cart/Counter';
 import Button from '@/components/ui/Button';
-import { CART_QUERY_KEY, useRemoveFromCart } from '@/hooks/useCart';
+import {
+  CART_QUERY_KEY,
+  useRemoveFromCart,
+  useUpdateProductQuantity,
+} from '@/hooks/useCart';
 import { useQueryClient } from '@tanstack/react-query';
-import { it } from 'node:test';
 
 interface CartItemProps {
   item: Item;
@@ -24,7 +26,22 @@ const CartItem = ({ item, cartId }: CartItemProps) => {
       });
     },
   });
-  const [count, setCount] = useState(item.quantity);
+
+  const updateQuantity = useUpdateProductQuantity(cartId, item.productId, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [CART_QUERY_KEY, '6572327e911ee43f8c3817be'],
+      });
+    },
+  });
+
+  const handleUpdateQuantity = async (quantity: number) => {
+    await updateQuantity.mutateAsync({
+      cartId,
+      productId: item.productId,
+      quantity,
+    });
+  };
 
   return (
     <div className={'w-full border-b-2 border-black'}>
@@ -41,7 +58,7 @@ const CartItem = ({ item, cartId }: CartItemProps) => {
           <div className={'text-xl'}>{formatPrice(item.price)}</div>
         </div>
         <div className={'ml-auto flex items-center gap-2'}>
-          <Counter count={count} setCount={setCount} />
+          <Counter count={item.quantity} setCount={handleUpdateQuantity} />
           <Button
             onClick={async () =>
               removeItem.mutateAsync({ cartId, productId: item.productId })
