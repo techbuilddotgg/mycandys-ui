@@ -95,7 +95,9 @@ const CheckoutForm = () => {
       <Input {...register('address')} placeholder={'Address'} />
       <Input {...register('postalCode')} placeholder={'Postal Code'} />
       <Input {...register('city')} placeholder={'City'} />
-      <Button>FINISH</Button>
+      <Button disabled={!cart?._id} className={'disabled:bg-gray-200'}>
+        FINISH
+      </Button>
     </form>
   );
 };

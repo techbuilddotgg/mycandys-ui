@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { getCartCookie, removeCartCookie, setCartCookie } from '@/utils/cart';
 
-const DEFAULT_CART_ID = '';
+const DEFAULT_CART_ID = '6571cb17f172ad57d19b8206';
 
 type CartContextType = {
   cartId: string;
@@ -45,8 +45,8 @@ export const CartProvider = ({
     return {
       cartId,
       update: (id: string) => {
-        setCartCookie({ _id: id });
         setCartId(id);
+        setCartCookie({ _id: id });
       },
       remove: () => {
         setCartId('');

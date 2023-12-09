@@ -64,17 +64,17 @@ export default async function Home() {
 
   return (
     <>
-      <div className={' my-4  flex w-full'}>
+      <div className={'my-4 flex w-full'}>
         <Marquee items={carouselItems} />
-      </div>
-      <div className={'my-2 flex w-full flex-row justify-center'}>
-        <SearchForm />
       </div>
       <div className={'mt-4 flex w-full flex-row gap-10'}>
         <ProductFilter />
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <ProductList />
-        </HydrationBoundary>
+        <div className={'flex w-full flex-col items-center'}>
+          <SearchForm />
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <ProductList />
+          </HydrationBoundary>
+        </div>
       </div>
     </>
   );

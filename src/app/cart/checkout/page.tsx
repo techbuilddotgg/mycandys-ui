@@ -1,36 +1,15 @@
-'use client';
-import React, { useEffect } from 'react';
-import Stepper from '@/components/ui/Stepper';
-import { useQueryParams } from '@/hooks/useQueryParams';
-import { Route } from '@/constants/routes';
-import CheckoutForm from '@/components/page/cart/Checkout/CheckoutForm';
-import CheckoutTotal from '@/components/page/cart/Checkout/CheckoutTotal';
+import Checkout from '@/components/page/cart/Checkout/Checkout';
+import { QueryClient } from '@tanstack/react-query';
+import { getUser } from '@/api/user';
+import { USER_QUERY_KEY } from '@/hooks/useUser';
 
-const Checkout = () => {
-  const { updateQueryParams } = useQueryParams();
+export default async function CheckoutPage() {
+  const queryClient = new QueryClient();
 
-  useEffect(() => {
-    updateQueryParams({ step: 2 });
-  }, [updateQueryParams]);
+  await queryClient.prefetchQuery({
+    queryKey: [USER_QUERY_KEY],
+    queryFn: getUser,
+  });
 
-  return (
-    <div className={'flex flex-col'}>
-      <div className={'m-auto'}>
-        <Stepper
-          steps={[
-            { name: 'CART', href: Route.CART },
-            { name: 'SHIPPING', href: Route.CHECKOUT },
-            {
-              name: 'FINISH',
-              href: '/',
-            },
-          ]}
-        />
-      </div>
-      <CheckoutForm />
-      <CheckoutTotal />
-    </div>
-  );
-};
-
-export default Checkout;
+  return <Checkout />;
+}

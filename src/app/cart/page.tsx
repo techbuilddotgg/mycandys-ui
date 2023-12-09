@@ -1,32 +1,18 @@
-'use client';
-import { Route } from '@/constants/routes';
-import Stepper from '@/components/ui/Stepper';
-import { useQueryParams } from '@/hooks/useQueryParams';
-import { useEffect } from 'react';
-import Cart from '@/components/page/cart/Cart';
+import { ShoppingCart } from '@/components/page/cart/ShoppingCart';
+import { QueryClient } from '@tanstack/react-query';
+import { getCartCookie } from '@/utils/cart';
+import { CART_QUERY_KEY } from '@/hooks/useCart';
+import { getCart } from '@/api/cart';
+import { cookies } from 'next/headers';
 
-export default function ShoppingCart() {
-  const { updateQueryParams } = useQueryParams();
+export default async function CartPage() {
+  const queryClient = new QueryClient();
+  const cart = getCartCookie({ cookies });
 
-  useEffect(() => {
-    updateQueryParams({ step: 1 });
-  }, [updateQueryParams]);
+  await queryClient.prefetchQuery({
+    queryKey: [CART_QUERY_KEY, cart?._id],
+    queryFn: () => getCart(cart?._id as string),
+  });
 
-  return (
-    <div className={'flex w-full flex-col'}>
-      <div className={'m-auto'}>
-        <Stepper
-          steps={[
-            { name: 'CART', href: Route.CART },
-            { name: 'SHIPPING', href: Route.CHECKOUT },
-            {
-              name: 'FINISH',
-              href: '/',
-            },
-          ]}
-        />
-      </div>
-      <Cart />
-    </div>
-  );
+  return <ShoppingCart />;
 }

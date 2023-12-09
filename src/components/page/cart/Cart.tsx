@@ -36,15 +36,15 @@ const Cart = () => {
           'mt-2 flex w-full flex-row flex-wrap gap-2 rounded-md border-2 border-black bg-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
         }
       >
-        {cart?.items.length === 0 ? (
-          <div className={'text-xl font-semibold'}>
-            Looks like you don&apos;t any items in your 🛒
+        {isLoading ? (
+          <div className={'my-8 flex w-full justify-center'}>
+            <Loading />
           </div>
         ) : (
           <>
-            {isLoading ? (
-              <div className={'my-8 flex w-full justify-center'}>
-                <Loading />
+            {cart?.items.length === 0 ? (
+              <div className={'text-xl font-semibold'}>
+                Looks like you don&apos;t any items in your 🛒
               </div>
             ) : (
               <>
