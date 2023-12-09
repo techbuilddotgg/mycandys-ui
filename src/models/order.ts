@@ -1,5 +1,7 @@
-import { Item } from '@/models/cart';
+import { Cart, Item } from '@/models/cart';
 import { User } from '@/models/user';
+
+export const SHIPPING_COST = 5;
 
 export enum OrderStatus {
   Pending = 'pending',
@@ -18,10 +20,10 @@ export const formatOrderStatus = (status: OrderStatus) => {
 };
 
 export interface Order {
-  id: number;
+  id: string;
   deliveryDate: string;
   address: string;
-  total: number;
+  cost: number;
   status: OrderStatus;
   createdAt: string;
   cart: Item[];
@@ -42,11 +44,12 @@ export interface CreateOrderData {
   }[];
   userId: string;
   cartId: string;
+  cost: number;
 }
 
 export const createOrderData = (
   user: User,
-  cart: Item[],
+  cart: Cart,
   cartId: string,
 ): CreateOrderData => {
   return {
@@ -54,7 +57,8 @@ export const createOrderData = (
     city: user.city,
     country: user.country,
     postalCode: user.postalCode,
-    items: cart.map((item) => ({
+    cost: cart.fullPrice + SHIPPING_COST,
+    items: cart.items.map((item) => ({
       category: item.category,
       description: '',
       id: item.productId,

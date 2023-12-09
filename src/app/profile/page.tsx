@@ -1,10 +1,5 @@
-'use client';
-import React from 'react';
-import { Order } from '@/models/order';
-import OrdersTable from '@/components/page/profile/OrdersTable/OrdersTable';
 import ProfileForm from '@/components/page/profile/ProfileForm';
-
-const dummy_data: Order[] = [];
+import UserOrdersList from '@/components/page/profile/UserOrdersList/UserOrdersList';
 
 const Profile = () => {
   return (
@@ -18,7 +13,7 @@ const Profile = () => {
       />
       <ProfileForm />
       <div className={'mt-10'}>
-        <OrdersTable orders={dummy_data} />
+        <UserOrdersList />
       </div>
     </div>
   );

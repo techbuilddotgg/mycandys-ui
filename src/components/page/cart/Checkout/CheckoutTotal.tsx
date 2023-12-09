@@ -1,7 +1,7 @@
-import React from 'react';
 import { formatPrice } from '@/utils/price';
-import { CART_QUERY_KEY, useCart } from '@/hooks/useCart';
+import { useCart } from '@/hooks/useCart';
 import { useCartContext } from '@/components/providers/CartProvider';
+import { SHIPPING_COST } from '@/models/order';
 
 const CheckoutTotal = () => {
   const { cartId } = useCartContext();
@@ -11,8 +11,7 @@ const CheckoutTotal = () => {
   });
 
   const cartPrice = cart?.fullPrice || 0;
-  const shippingPrice = 5;
-  const totalPrice = cartPrice + shippingPrice;
+  const totalPrice = cartPrice + SHIPPING_COST;
 
   return (
     <div className={'mt-4 flex flex-col'}>
@@ -23,7 +22,7 @@ const CheckoutTotal = () => {
       </div>
       <div className={'flex'}>
         <span className={'font-semibold'}>Shipping</span>
-        <span className={'ml-auto'}>{formatPrice(shippingPrice)}</span>
+        <span className={'ml-auto'}>{formatPrice(SHIPPING_COST)}</span>
       </div>
       <div className={'w-full  border-b-2 border-black'} />
       <div className={'flex'}>

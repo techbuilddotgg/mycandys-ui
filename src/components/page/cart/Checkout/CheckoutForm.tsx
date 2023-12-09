@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
@@ -10,6 +10,7 @@ import { useCreateOrder } from '@/hooks/useOrder';
 import { createOrderData } from '@/models/order';
 import { User } from '@/models/user';
 import { useCartContext } from '@/components/providers/CartProvider';
+import { useUser } from '@/hooks/useUser';
 
 interface CheckoutFormData {
   email: string;
@@ -31,29 +32,45 @@ const defaultValues: CheckoutFormData = {
 
 const CheckoutForm = () => {
   const { push } = useRouter();
-  const { register, handleSubmit } = useForm<CheckoutFormData>({
+
+  const { register, handleSubmit, reset } = useForm<CheckoutFormData>({
     defaultValues,
   });
+
   const { cartId } = useCartContext();
   const { data: cart } = useCart(cartId, { enabled: !!cartId });
+
   const createOrder = useCreateOrder({
     onSuccess: () => {
       push(Route.FINISH);
     },
   });
 
+  const { data: userDetails } = useUser();
+
+  useEffect(() => {
+    if (userDetails) {
+      reset({
+        email: userDetails.email,
+        phone: userDetails.phone,
+        address: userDetails.address,
+        postalCode: userDetails.postalCode,
+        city: userDetails.city,
+        country: userDetails.country,
+      });
+    }
+  }, [reset, userDetails]);
+
   const onSubmit = async (data: CheckoutFormData) => {
+    if (!cart) return;
+
     const user: User = {
       ...data,
-      id: '',
+      id: userDetails?.id as string,
       name: '',
     };
 
-    const order = createOrderData(
-      user,
-      cart?.items || [],
-      '6572327e911ee43f8c3817be',
-    );
+    const order = createOrderData(user, cart, cartId);
 
     await createOrder.mutateAsync({
       order,

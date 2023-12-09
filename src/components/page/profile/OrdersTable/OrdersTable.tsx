@@ -1,8 +1,8 @@
-import React from 'react';
 import { Order } from '@/models/order';
 import { formatPrice } from '@/utils/price';
 import styles from './table.module.css';
 import OrderStatusBadge from '@/components/page/profile/OrderStatusBadge';
+import { shortenString } from '@/utils/shoretnString';
 
 interface OrdersTableProps {
   orders: Order[];
@@ -33,13 +33,13 @@ const OrdersTable = ({ orders }: OrdersTableProps) => {
             <>
               {orders.map((order) => (
                 <tr key={order.id} className={''}>
-                  <td className={'p-3'}>{order.id}</td>
+                  <td className={'p-3'}>{shortenString(order.id)}</td>
                   <td className={'p-3'}>{order.createdAt}</td>
                   <td className={'p-3'}>{order.deliveryDate}</td>
                   <td className={'p-3'}>
                     <OrderStatusBadge status={order.status} />
                   </td>
-                  <td className={'p-3'}>{formatPrice(order.total)}</td>
+                  <td className={'p-3'}>{formatPrice(order.cost)}</td>
                 </tr>
               ))}
             </>
