@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { Item } from '@/models/cart';
+import { Cart, Item } from '@/models/cart';
 import { formatPrice } from '@/utils/price';
 import Counter from '@/components/page/cart/Counter';
 import Button from '@/components/ui/Button';
@@ -28,7 +28,40 @@ const CartItem = ({ item, cartId }: CartItemProps) => {
   });
 
   const updateQuantity = useUpdateProductQuantity(cartId, item.productId, {
+    onMutate: async (data) => {
+      // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+      await queryClient.cancelQueries({
+        queryKey: [CART_QUERY_KEY, cartId],
+      });
+
+      const previousCart = queryClient.getQueryData([
+        CART_QUERY_KEY,
+        cartId,
+      ]) as Cart;
+
+      const newCart = {
+        ...previousCart,
+        items: previousCart.items.map((i) =>
+          i.productId === item.productId
+            ? { ...i, quantity: data.quantity }
+            : i,
+        ),
+      };
+
+      queryClient.setQueryData([CART_QUERY_KEY, cartId], newCart);
+      console.log(newCart);
+      return { previousCart, newCart };
+    },
     onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [CART_QUERY_KEY, cartId],
+      });
+    },
+    onError: async (error, newTodo, context) => {
+      const { previousCart } = context as { newCart: Cart; previousCart: Cart };
+      queryClient.setQueryData([CART_QUERY_KEY, cartId], previousCart);
+    },
+    onSettled: async () => {
       await queryClient.invalidateQueries({
         queryKey: [CART_QUERY_KEY, cartId],
       });

@@ -19,7 +19,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={publicSans.className}>
         <Providers>
           <Navbar />
-
           <main className="flex min-h-screen flex-col items-center bg-secondary p-24 pb-10">
             <Suspense fallback={<Loading />}>{children}</Suspense>
           </main>

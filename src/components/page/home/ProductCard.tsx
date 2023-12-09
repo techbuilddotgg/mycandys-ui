@@ -8,6 +8,7 @@ import { formatPrice } from '@/utils/price';
 import Button from '@/components/ui/Button';
 import { classnames } from '@/utils/classnames';
 import { useCartContext } from '@/components/providers/CartProvider';
+import { toast } from 'sonner';
 
 interface ProductCardProps {
   product: Product;
@@ -23,6 +24,20 @@ const ProductCard = ({ product }: ProductCardProps) => {
   });
 
   const isDiscounted = product.temporaryPrice > 0;
+
+  const addToCart = () => {
+    toast.promise(
+      mutateAsync({
+        productId: product._id,
+        cartId,
+      }),
+      {
+        loading: 'Adding to cart...',
+        success: 'Added to cart!',
+        error: 'Error adding to cart!',
+      },
+    );
+  };
 
   return (
     <Card heading={product.name}>
@@ -48,15 +63,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         )}
       </div>
-      <Button
-        onClick={async () =>
-          mutateAsync({
-            productId: product._id,
-            cartId,
-          })
-        }
-        className={'mt-2 w-full bg-emerald-300'}
-      >
+      <Button onClick={addToCart} className={'mt-2 w-full bg-emerald-300'}>
         ADD TO CART
       </Button>
     </Card>
