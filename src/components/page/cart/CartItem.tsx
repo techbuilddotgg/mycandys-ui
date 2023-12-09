@@ -20,7 +20,34 @@ const CartItem = ({ item, cartId }: CartItemProps) => {
   const queryClient = useQueryClient();
 
   const removeItem = useRemoveFromCart(cartId, item.productId, {
+    onMutate: async (data) => {
+      await queryClient.cancelQueries({
+        queryKey: [CART_QUERY_KEY, cartId],
+      });
+
+      const previousCart = queryClient.getQueryData([
+        CART_QUERY_KEY,
+        cartId,
+      ]) as Cart;
+
+      const newCart = {
+        ...previousCart,
+        items: previousCart.items.filter((i) => i.productId !== data.productId),
+      };
+
+      queryClient.setQueryData([CART_QUERY_KEY, cartId], newCart);
+      return { previousCart, newCart };
+    },
     onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [CART_QUERY_KEY, cartId],
+      });
+    },
+    onError: async (error, newTodo, context) => {
+      const { previousCart } = context as { newCart: Cart; previousCart: Cart };
+      queryClient.setQueryData([CART_QUERY_KEY, cartId], previousCart);
+    },
+    onSettled: async () => {
       await queryClient.invalidateQueries({
         queryKey: [CART_QUERY_KEY, cartId],
       });
@@ -49,7 +76,6 @@ const CartItem = ({ item, cartId }: CartItemProps) => {
       };
 
       queryClient.setQueryData([CART_QUERY_KEY, cartId], newCart);
-      console.log(newCart);
       return { previousCart, newCart };
     },
     onSuccess: async () => {

@@ -14,7 +14,7 @@ export default function Providers({ children }: { children: ReactNode }) {
         <QueryClientProvider client={queryClient}>
           {children}
           <ToastProvider
-            position={'top-right'}
+            position={'bottom-right'}
             toastOptions={{
               unstyled: true,
               classNames: {

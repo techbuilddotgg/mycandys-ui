@@ -9,6 +9,7 @@ import Loading from '@/components/ui/Loading';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCartContext } from '@/components/providers/CartProvider';
+import { toast } from 'sonner';
 
 const Cart = () => {
   const router = useRouter();
@@ -50,7 +51,14 @@ const Cart = () => {
                 <Button
                   className={'ml-auto bg-red-400'}
                   onClick={() =>
-                    clearCart.mutateAsync({ cartId: cart?._id as string })
+                    toast.promise(
+                      clearCart.mutateAsync({ cartId: cart?._id as string }),
+                      {
+                        loading: 'Clearing cart...',
+                        success: 'Cleared cart!',
+                        error: 'Error clearing cart!',
+                      },
+                    )
                   }
                 >
                   CLEAR CART
