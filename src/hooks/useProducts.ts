@@ -42,12 +42,13 @@ export const useCategories = (
   });
 };
 
+export const PRODUCTS_BY_CATEGORY_QUERY_KEY = 'productsByCategory';
 export const useProductsByCategory = (
   category: string,
   opts?: Partial<UseQueryOptions<Product[], AxiosError, Product[]>>,
 ) => {
   return useQuery({
-    queryKey: [CATEGORY_QUERY_KEY, category],
+    queryKey: [PRODUCTS_BY_CATEGORY_QUERY_KEY, category],
     queryFn: () => getProductsByCategory(category),
     ...opts,
   });

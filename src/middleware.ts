@@ -12,4 +12,11 @@ export default function middleware(req: NextRequest) {
   if (isProtectedRoute && !isAuth) {
     return NextResponse.redirect(new URL(Route.LOGIN, req.url));
   }
+
+  const headers = new Headers();
+  headers.set('x-url', req.url);
+
+  return NextResponse.next({
+    headers,
+  });
 }
