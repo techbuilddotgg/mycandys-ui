@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatOrderStatus, OrderStatus } from '@/models/order';
+import { getOrderStatusLabel, OrderStatus } from '@/models/order';
 import { classnames } from '@/utils/classnames';
 
 interface OrderStatusProps {
@@ -20,7 +20,7 @@ const OrderStatusBadge = ({ status }: OrderStatusProps) => {
               : '',
       )}
     >
-      {formatOrderStatus(status)}
+      {getOrderStatusLabel(status)}
     </div>
   );
 };

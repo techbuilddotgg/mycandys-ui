@@ -63,7 +63,7 @@ export default async function Home() {
   }
 
   return (
-    <>
+    <main className="flex min-h-screen flex-col items-center p-24 pb-10">
       <div className={'my-4 flex w-full'}>
         <Marquee items={carouselItems} />
       </div>
@@ -76,6 +76,6 @@ export default async function Home() {
           </HydrationBoundary>
         </div>
       </div>
-    </>
+    </main>
   );
 }

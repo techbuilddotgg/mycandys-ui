@@ -7,6 +7,7 @@ const config: Config = {
       colors: {
         primary: '#bc95d4',
         secondary: '#C9DCD8',
+        'primary-dark': '#a36ec4',
       },
       animation: {
         marquee: 'marquee 15s linear infinite',
@@ -24,7 +25,8 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },

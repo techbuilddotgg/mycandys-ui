@@ -59,21 +59,65 @@ const ProfileForm = () => {
 
   return (
     <form
-      className={'mt-4 flex flex-col gap-4'}
+      className={'mt-4 flex w-[500px] flex-col gap-2'}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Input
-        {...register('name')}
-        placeholder={'Name'}
-        disabled
-        className={'disabled:bg-gray-200'}
-      />
-      <Input {...register('phone')} placeholder={'Phone'} />
-      <Input {...register('country')} placeholder={'Country'} />
-      <Input {...register('address')} placeholder={'Address'} />
-      <Input {...register('postalCode')} placeholder={'Postal Code'} />
-      <Input {...register('city')} placeholder={'City'} />
-      <Button>SAVE</Button>
+      <div>
+        <label className={'text-xs font-bold'}>EMAIL </label>
+        <Input
+          {...register('name')}
+          placeholder={'Name'}
+          disabled
+          className={'disabled:bg-gray-200'}
+        />
+      </div>
+
+      <div>
+        <label className={'text-xs font-bold'}>PHONE </label>
+        <Input
+          {...register('phone')}
+          placeholder={'Phone'}
+          className={'disabled:bg-gray-200'}
+        />
+      </div>
+
+      <div>
+        <label className={'text-xs font-bold'}>ADDRESS </label>
+        <Input
+          {...register('address')}
+          placeholder={'Address'}
+          className={'disabled:bg-gray-200'}
+        />
+      </div>
+
+      <div>
+        <label className={'text-xs font-bold'}>POSTAL CODE </label>
+        <Input
+          {...register('postalCode')}
+          placeholder={'Postal Code'}
+          className={'disabled:bg-gray-200'}
+        />
+      </div>
+
+      <div>
+        <label className={'text-xs font-bold'}>CITY </label>
+        <Input
+          {...register('city')}
+          placeholder={'City'}
+          className={'disabled:bg-gray-200'}
+        />
+      </div>
+
+      <div>
+        <label className={'text-xs font-bold'}>COUNTRY </label>
+        <Input
+          {...register('country')}
+          placeholder={'Country'}
+          className={'disabled:bg-gray-200'}
+        />
+      </div>
+
+      <Button className={'mt-4'}>SAVE</Button>
     </form>
   );
 };

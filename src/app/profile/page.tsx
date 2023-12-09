@@ -1,5 +1,4 @@
 import ProfileForm from '@/components/page/profile/ProfileForm';
-import UserOrdersList from '@/components/page/profile/UserOrdersList/UserOrdersList';
 import {
   dehydrate,
   HydrationBoundary,
@@ -17,7 +16,7 @@ export default async function Profile() {
   });
 
   return (
-    <div>
+    <div className={'flex w-full flex-col items-center'}>
       <h1 className={'text-center text-3xl font-bold'}>Profile</h1>
       <div
         style={{
@@ -28,9 +27,6 @@ export default async function Profile() {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ProfileForm />
       </HydrationBoundary>
-      <div className={'mt-10'}>
-        <UserOrdersList />
-      </div>
     </div>
   );
 }

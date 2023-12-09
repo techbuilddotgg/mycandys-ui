@@ -18,6 +18,15 @@
     border-bottom: var(--border);
 }
 
+
+.table tr {
+ text-align: center;
+}
+
+.table tbody tr:hover {
+    @apply bg-gray-200 cursor-pointer;
+}
+
 /* Apply a border to the right of all but the last column */
 /*.table th:not(:last-child),*/
 /*.table td:not(:last-child) {*/

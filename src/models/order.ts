@@ -5,8 +5,8 @@ export const SHIPPING_COST = 5;
 
 export enum OrderStatus {
   Pending = 'pending',
-  Delivered = 'delivered',
   Shipped = 'shipped',
+  Delivered = 'delivered',
 }
 
 export const OrderStatusLabels = {
@@ -15,7 +15,17 @@ export const OrderStatusLabels = {
   [OrderStatus.Shipped]: 'Shipped',
 };
 
-export const formatOrderStatus = (status: OrderStatus) => {
+export const OrderStatusColors = {
+  [OrderStatus.Pending]: 'bg-yellow-400 hover:bg-yellow-500',
+  [OrderStatus.Delivered]: 'bg-green-400 hover:bg-green-500',
+  [OrderStatus.Shipped]: 'bg-blue-400 hover:bg-blue-500',
+};
+
+export const getOrderStatusColor = (status: OrderStatus) => {
+  return OrderStatusColors[status] || 'bg-primary hover:bg-primary-dark';
+};
+
+export const getOrderStatusLabel = (status: OrderStatus) => {
   return OrderStatusLabels[status] || status;
 };
 
