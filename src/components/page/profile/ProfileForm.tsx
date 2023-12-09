@@ -59,7 +59,7 @@ const ProfileForm = () => {
 
   return (
     <form
-      className={'mt-4 flex w-[500px] flex-col gap-2'}
+      className={'flex w-[500px] flex-col gap-2'}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div>
