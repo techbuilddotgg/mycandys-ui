@@ -5,6 +5,7 @@ interface URLQueryParams {
   tab?: string;
   step?: number;
   search?: string;
+  category?: string;
 }
 
 export const useQueryParams = () => {
@@ -39,6 +40,7 @@ export const useQueryParams = () => {
       tab: query.get('tab'),
       step: parseInt(query.get('step') || '0'),
       search: query.get('search'),
+      category: query.get('category'),
     };
   };
 

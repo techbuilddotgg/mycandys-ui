@@ -1,11 +1,16 @@
-import { getProductCategories, getProducts, getSearchProducts } from '@/api/products';
+import {
+  getProductCategories,
+  getProducts,
+  getProductsByCategory,
+  getSearchProducts,
+} from '@/api/products';
 import { Product } from '@/models/product';
 import { AxiosError } from 'axios';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export const PRODUCTS_QUERY_KEY = 'products';
 export const useProducts = (
-  opts?: UseQueryOptions<Product[], AxiosError, Product[]>,
+  opts?: Partial<UseQueryOptions<Product[], AxiosError, Product[]>>,
 ) => {
   return useQuery({
     queryKey: [PRODUCTS_QUERY_KEY],
@@ -17,7 +22,7 @@ export const useProducts = (
 export const SEARCH_PRODUCTS_QUERY_KEY = 'search';
 export const useSearchProducts = (
   query: string,
-  opts?: UseQueryOptions<Product[], AxiosError, Product[], [typeof  SEARCH_PRODUCTS_QUERY_KEY, string]>,
+  opts?: Partial<UseQueryOptions<Product[], AxiosError, Product[]>>,
 ) => {
   return useQuery({
     queryKey: [SEARCH_PRODUCTS_QUERY_KEY, query],
@@ -35,4 +40,49 @@ export const useCategories = (
     queryFn: getProductCategories,
     ...opts,
   });
+};
+
+export const useProductsByCategory = (
+  category: string,
+  opts?: Partial<UseQueryOptions<Product[], AxiosError, Product[]>>,
+) => {
+  return useQuery({
+    queryKey: [CATEGORY_QUERY_KEY, category],
+    queryFn: () => getProductsByCategory(category),
+    ...opts,
+  });
+};
+
+export const useFilterProducts = (search: string, category: string) => {
+  const products = useProducts({
+    enabled: !search && !category,
+  });
+  const productsByCategory = useProductsByCategory(category, {
+    enabled: !!category && !search,
+  });
+  const searchProducts = useSearchProducts(search, {
+    enabled: !!search && !category,
+  });
+
+  if (category && !search) {
+    return {
+      data: productsByCategory.data,
+      isLoading: productsByCategory.isLoading,
+      isError: productsByCategory.isError,
+    };
+  }
+
+  if (search) {
+    return {
+      data: searchProducts.data,
+      isLoading: searchProducts.isLoading,
+      isError: searchProducts.isError,
+    };
+  }
+
+  return {
+    data: products.data,
+    isLoading: products.isLoading,
+    isError: products.isError,
+  };
 };

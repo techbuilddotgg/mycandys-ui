@@ -1,9 +1,14 @@
-'use client';
-import { useState } from 'react';
+interface RadioGroupProps {
+  items: string[];
+  activeItem: string;
+  setActiveItem: (item: string) => void;
+}
 
-export default function RadioGroup({ items }: { items: string[] }) {
-  const [activeItem, setActiveItem] = useState<string | null>(null);
-
+export default function RadioGroup({
+  items,
+  activeItem,
+  setActiveItem,
+}: RadioGroupProps) {
   return (
     <div className="font-bold">
       {items.map((item) => {
@@ -24,7 +29,7 @@ export default function RadioGroup({ items }: { items: string[] }) {
                 <div className="h-full w-full rounded-full bg-black"></div>
               )}
             </div>
-            <p>{item}</p>
+            <p className={'capitalize'}>{item}</p>
           </button>
         );
       })}

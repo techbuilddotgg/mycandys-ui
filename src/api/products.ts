@@ -21,6 +21,13 @@ export const getProductCategories = async () => {
 export const getSearchProducts = async (query: string) => {
   const { data } = (await api.get(
     `${APIRoute.PRODUCTS}/search?name=${query}`,
-    )) as AxiosResponse<Product[]>;
+  )) as AxiosResponse<Product[]>;
+  return data;
+};
+
+export const getProductsByCategory = async (category: string) => {
+  const { data } = (await api.get(
+    `${APIRoute.PRODUCTS}/category/${category}`,
+  )) as AxiosResponse<Product[]>;
   return data;
 };
