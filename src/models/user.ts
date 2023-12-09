@@ -8,3 +8,5 @@ export interface User {
   postalCode: string;
   phone: string;
 }
+
+export interface UpdateUser extends Omit<User, 'id' | 'email'> {}
