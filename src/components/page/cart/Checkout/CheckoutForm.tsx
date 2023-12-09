@@ -11,6 +11,7 @@ import { createOrderData } from '@/models/order';
 import { User } from '@/models/user';
 import { useCartContext } from '@/components/providers/CartProvider';
 import { useUser } from '@/hooks/useUser';
+import { toast } from 'sonner';
 
 interface CheckoutFormData {
   email: string;
@@ -71,10 +72,16 @@ const CheckoutForm = () => {
     };
 
     const order = createOrderData(user, cart, cartId);
-
-    await createOrder.mutateAsync({
-      order,
-    });
+    toast.promise(
+      createOrder.mutateAsync({
+        order,
+      }),
+      {
+        loading: 'Creating order...',
+        success: 'Created order!',
+        error: 'Error creating order!',
+      },
+    );
   };
 
   return (
