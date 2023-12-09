@@ -7,8 +7,7 @@ import {
 } from '@/models/auth';
 import { api } from '@/api/axios';
 import { AxiosResponse } from 'axios';
-import { SESSION_KEY } from '@/utils/session';
-import { setCookie } from '@/utils/cookie';
+import { setSessionCookie } from '@/utils/session';
 
 export const login = async (body: LoginRequest) => {
   const { data } = (await api.post(
@@ -17,7 +16,7 @@ export const login = async (body: LoginRequest) => {
   )) as AxiosResponse<LoginResponse>;
 
   if (data.access_token) {
-    setCookie(SESSION_KEY, JSON.stringify(data));
+    setSessionCookie(data);
   }
 
   return data;

@@ -1,4 +1,4 @@
-import { getCookie } from '@/utils/cookie';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 
 export const SESSION_KEY = 'session';
 
@@ -13,5 +13,9 @@ export const getSession = (): Session | null => {
 };
 
 export const removeCookieSession = () => {
-  document.cookie = `${SESSION_KEY}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+  deleteCookie(SESSION_KEY);
+};
+
+export const setSessionCookie = (session: Session) => {
+  setCookie(SESSION_KEY, JSON.stringify(session));
 };

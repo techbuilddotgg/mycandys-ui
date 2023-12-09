@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import { useRegisterUser } from '@/hooks/useAuth';
-import { env } from '@/env.mjs';
 import { useRouter } from 'next/navigation';
 import { Route } from '@/constants/routes';
 
@@ -36,7 +35,6 @@ const SignUpForm = () => {
     await mutateAsync({
       email: data.email,
       password: data.password,
-      role: 'ADMIN',
     });
   };
 

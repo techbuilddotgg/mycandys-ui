@@ -22,7 +22,7 @@ const CartItem = ({ item, cartId }: CartItemProps) => {
   const removeItem = useRemoveFromCart(cartId, item.productId, {
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [CART_QUERY_KEY, '6572327e911ee43f8c3817be'],
+        queryKey: [CART_QUERY_KEY, cartId],
       });
     },
   });
@@ -30,7 +30,7 @@ const CartItem = ({ item, cartId }: CartItemProps) => {
   const updateQuantity = useUpdateProductQuantity(cartId, item.productId, {
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [CART_QUERY_KEY, '6572327e911ee43f8c3817be'],
+        queryKey: [CART_QUERY_KEY, cartId],
       });
     },
   });

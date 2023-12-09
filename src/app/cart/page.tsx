@@ -1,5 +1,4 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import { Route } from '@/constants/routes';
 import Stepper from '@/components/ui/Stepper';
 import { useQueryParams } from '@/hooks/useQueryParams';
@@ -7,7 +6,6 @@ import { useEffect } from 'react';
 import Cart from '@/components/page/cart/Cart';
 
 export default function ShoppingCart() {
-  const router = useRouter();
   const { updateQueryParams } = useQueryParams();
 
   useEffect(() => {

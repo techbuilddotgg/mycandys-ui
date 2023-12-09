@@ -8,16 +8,21 @@ import { CART_QUERY_KEY, useCart, useClearCart } from '@/hooks/useCart';
 import Loading from '@/components/ui/Loading';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
+import { useCartContext } from '@/components/providers/CartProvider';
 
 const Cart = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { data: cart, isLoading } = useCart('6572327e911ee43f8c3817be');
+  const { cartId } = useCartContext();
+
+  const { data: cart, isLoading } = useCart(cartId, {
+    enabled: !!cartId,
+  });
 
   const clearCart = useClearCart({
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [CART_QUERY_KEY, '6572327e911ee43f8c3817be'],
+        queryKey: [CART_QUERY_KEY, cartId],
       });
     },
   });
@@ -51,11 +56,7 @@ const Cart = () => {
                   CLEAR CART
                 </Button>
                 {cart?.items.map((item) => (
-                  <CartItem
-                    item={item}
-                    key={item.productId}
-                    cartId={cart?._id}
-                  />
+                  <CartItem item={item} key={item.productId} cartId={cartId} />
                 ))}
                 <div className={'flex w-full flex-row justify-between'}>
                   <div className={'text-xl font-semibold'}>

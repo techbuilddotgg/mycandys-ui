@@ -9,6 +9,7 @@ import { useCart } from '@/hooks/useCart';
 import { useCreateOrder } from '@/hooks/useOrder';
 import { createOrderData } from '@/models/order';
 import { User } from '@/models/user';
+import { useCartContext } from '@/components/providers/CartProvider';
 
 interface CheckoutFormData {
   email: string;
@@ -33,7 +34,8 @@ const CheckoutForm = () => {
   const { register, handleSubmit } = useForm<CheckoutFormData>({
     defaultValues,
   });
-  const { data: cart } = useCart('6572327e911ee43f8c3817be');
+  const { cartId } = useCartContext();
+  const { data: cart } = useCart(cartId, { enabled: !!cartId });
   const createOrder = useCreateOrder({
     onSuccess: () => {
       push(Route.FINISH);

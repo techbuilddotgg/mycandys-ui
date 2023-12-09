@@ -7,13 +7,21 @@ import Card from '@/components/ui/Card';
 import { formatPrice } from '@/utils/price';
 import Button from '@/components/ui/Button';
 import { classnames } from '@/utils/classnames';
+import { useCartContext } from '@/components/providers/CartProvider';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { mutateAsync } = useAddToCart();
+  const { cartId, update } = useCartContext();
+
+  const { mutateAsync } = useAddToCart({
+    onSuccess: (cart) => {
+      update(cart._id);
+    },
+  });
+
   const isDiscounted = product.temporaryPrice > 0;
 
   return (
@@ -44,7 +52,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         onClick={async () =>
           mutateAsync({
             productId: product._id,
-            cartId: '6572327e911ee43f8c3817be',
+            cartId,
           })
         }
         className={'mt-2 w-full bg-emerald-300'}

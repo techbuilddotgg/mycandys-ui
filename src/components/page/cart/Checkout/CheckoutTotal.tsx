@@ -1,9 +1,15 @@
 import React from 'react';
 import { formatPrice } from '@/utils/price';
-import { useCart } from '@/hooks/useCart';
+import { CART_QUERY_KEY, useCart } from '@/hooks/useCart';
+import { useCartContext } from '@/components/providers/CartProvider';
 
 const CheckoutTotal = () => {
-  const { data: cart } = useCart('6572327e911ee43f8c3817be');
+  const { cartId } = useCartContext();
+
+  const { data: cart } = useCart(cartId, {
+    enabled: !!cartId,
+  });
+
   const cartPrice = cart?.fullPrice || 0;
   const shippingPrice = 5;
   const totalPrice = cartPrice + shippingPrice;

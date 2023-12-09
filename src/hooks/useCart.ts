@@ -17,7 +17,7 @@ import { AxiosError } from 'axios';
 export const CART_QUERY_KEY = 'cart';
 export const useCart = (
   cartId: string,
-  opts?: UseQueryOptions<Cart, AxiosError, Cart>,
+  opts?: Partial<UseQueryOptions<Cart, AxiosError, Cart>>,
 ) => {
   return useQuery({
     queryKey: [CART_QUERY_KEY, cartId],
@@ -29,7 +29,7 @@ export const useCart = (
 const ADD_TO_CART_MUTATION_KEY = 'add-to-cart';
 export const useAddToCart = (
   opts?: UseMutationOptions<
-    {},
+    Cart,
     AxiosError,
     {
       cartId: string;

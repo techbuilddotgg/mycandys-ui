@@ -4,9 +4,14 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
-import { getSession, removeCookieSession } from '@/utils/session';
+import {
+  getSession,
+  removeCookieSession,
+  setSessionCookie,
+} from '@/utils/session';
 import { Session } from '@/utils/session';
 
 type SessionContextType = {
@@ -40,16 +45,19 @@ export const SessionProvider = ({
     }
   }, []);
 
-  const value: SessionContextType = {
-    session,
-    update: (session: Session) => {
-      setSession(session);
-    },
-    remove: () => {
-      setSession(null);
-      removeCookieSession();
-    },
-  };
+  const value: SessionContextType = useMemo(() => {
+    return {
+      session,
+      update: (session: Session) => {
+        setSession(session);
+        setSessionCookie(session);
+      },
+      remove: () => {
+        setSession(null);
+        removeCookieSession();
+      },
+    };
+  }, [session]);
 
   return (
     <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
