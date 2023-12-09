@@ -6,3 +6,5 @@ export enum Route {
   FINISH = '/cart/checkout/finish',
   PROFILE = '/profile',
 }
+
+export const protectedRoutes: Route[] = [Route.PROFILE];
