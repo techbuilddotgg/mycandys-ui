@@ -20,7 +20,9 @@ export const useLogin = (
 };
 
 const LOGOUT_MUTATION_KEY = 'logout';
-const useLogout = (opts?: UseMutationOptions<{}, AxiosError, {}, unknown>) => {
+export const useLogout = (
+  opts?: UseMutationOptions<{}, AxiosError, void, unknown>,
+) => {
   return useMutation({
     mutationKey: [LOGOUT_MUTATION_KEY],
     mutationFn: logout,
