@@ -1,5 +1,9 @@
 import { ShoppingCart } from '@/components/page/cart/ShoppingCart';
-import { QueryClient } from '@tanstack/react-query';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import { getCartCookie } from '@/utils/cart';
 import { CART_QUERY_KEY } from '@/hooks/useCart';
 import { getCart } from '@/api/cart';
@@ -14,5 +18,9 @@ export default async function CartPage() {
     queryFn: () => getCart(cart?._id as string),
   });
 
-  return <ShoppingCart />;
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ShoppingCart />
+    </HydrationBoundary>
+  );
 }

@@ -1,5 +1,9 @@
 import Checkout from '@/components/page/cart/Checkout/Checkout';
-import { QueryClient } from '@tanstack/react-query';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import { getUser } from '@/api/user';
 import { USER_QUERY_KEY } from '@/hooks/useUser';
 
@@ -11,5 +15,9 @@ export default async function CheckoutPage() {
     queryFn: getUser,
   });
 
-  return <Checkout />;
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Checkout />
+    </HydrationBoundary>
+  );
 }
