@@ -7,6 +7,8 @@ import {
 import { getUser } from '@/api/user';
 import { USER_QUERY_KEY } from '@/hooks/useUser';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CheckoutPage() {
   const queryClient = new QueryClient();
 
