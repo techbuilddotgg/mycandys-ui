@@ -24,10 +24,7 @@ const OrderListHeader = () => {
       <h1 className={'text-3xl font-bold'}>ORDERS</h1>
       <div className={'ml-auto'}>
         <Select
-          items={[
-            { label: 'All', className: 'bg-primary hover:bg-primary-dark' },
-            ...items,
-          ]}
+          items={items}
           selectedItem={urlQuery.status}
           setSelectedItem={setSelectedItem}
         />

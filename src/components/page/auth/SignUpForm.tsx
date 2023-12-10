@@ -56,7 +56,7 @@ const SignUpForm = () => {
         placeholder={'Confirm Password'}
         type={'password'}
       />
-      <Button>Sign Up</Button>
+      <Button className={'bg-tertiary text-white'}>Sign Up</Button>
     </form>
   );
 };

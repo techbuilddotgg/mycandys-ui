@@ -8,11 +8,13 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import {
+  CATEGORY_QUERY_KEY,
   PRODUCTS_BY_CATEGORY_QUERY_KEY,
   PRODUCTS_QUERY_KEY,
   SEARCH_PRODUCTS_QUERY_KEY,
 } from '@/hooks/useProducts';
 import {
+  getProductCategories,
   getProducts,
   getProductsByCategory,
   getSearchProducts,
@@ -61,6 +63,11 @@ export default async function Home() {
       queryFn: getProducts,
     });
   }
+
+  await queryClient.prefetchQuery({
+    queryKey: [CATEGORY_QUERY_KEY],
+    queryFn: getProductCategories,
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24 pb-10">

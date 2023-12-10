@@ -1,4 +1,4 @@
-import { CreateOrderData, Order } from '@/models/order';
+import { CreateOrderData, Order, OrderStatus } from '@/models/order';
 import { api } from '@/api/axios';
 import { APIRoute } from '@/api/routes';
 import { AxiosResponse } from 'axios';
@@ -11,20 +11,16 @@ export const createOrder = async (body: CreateOrderData) => {
   return data;
 };
 
-export const getOrdersByUserId = async (userId: string) => {
-  const { data } = (await api.get(
-    `${APIRoute.ORDERS}/user/${userId}`,
-  )) as AxiosResponse<Order[]>;
+export const getOrdersByUser = async () => {
+  const { data } = (await api.get(`${APIRoute.ORDERS}/me`)) as AxiosResponse<
+    Order[]
+  >;
   return data;
 };
 
-// TODO: getOrdersByUserIdAndStatus on backend
-export const getOrdersByUserIdAndStatus = async (
-  userId: string,
-  status: string,
-) => {
+export const getOrdersByUserAndStatus = async (status: OrderStatus) => {
   const { data } = (await api.get(
-    `${APIRoute.ORDERS}/user/${userId}/${status}`,
+    `${APIRoute.ORDERS}/me/status/${status}`,
   )) as AxiosResponse<Order[]>;
   return data;
 };

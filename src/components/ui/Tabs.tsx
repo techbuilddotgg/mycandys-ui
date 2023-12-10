@@ -1,3 +1,5 @@
+import config from '../../../tailwind.config';
+
 type Props = {
   tabsArray: string[];
   activeTab: string;
@@ -21,9 +23,12 @@ export default function Tabs({ tabsArray, activeTab, setActiveTab }: Props) {
             key={index}
             onClick={() => setActiveTab(tab)}
             style={{
-              backgroundColor: activeTab === tab ? '#a36ec4' : '#bc95d4',
+              backgroundColor:
+                activeTab === tab
+                  ? config.theme.extend.colors['tertiary-dark']
+                  : config.theme.extend.colors.tertiary,
             }}
-            className="cursor-pointer border-2 border-black px-6 py-3 text-center font-bold transition-colors first:rounded-ss-md last:rounded-se-md"
+            className="cursor-pointer border-2 border-black px-6 py-3 text-center font-bold text-white transition-colors first:rounded-ss-md last:rounded-se-md"
           >
             {tab}
           </button>

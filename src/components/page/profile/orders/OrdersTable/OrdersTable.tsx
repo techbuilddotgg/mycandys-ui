@@ -1,62 +1,87 @@
 'use client';
-import { Order } from '@/models/order';
 import { formatPrice } from '@/utils/price';
 import OrderStatusBadge from '@/components/page/profile/orders/OrderStatusBadge';
-import { shortenString } from '@/utils/shoretnString';
 import { useRouter } from 'next/navigation';
-
-import styles from './table.module.css';
-import { Route } from '@/constants/routes';
 import { formatDateString } from '@/utils/date';
+import { useFilterOrders } from '@/hooks/useOrder';
+import { useQueryParams } from '@/hooks/useQueryParams';
+import { OrderStatus } from '@/models/order';
+import Table, { TableHeader } from '@/components/ui/Table/Table';
+import { ReactNode } from 'react';
+import { Route } from '@/constants/routes';
+import Loading from '@/components/ui/Loading';
+import { GoPackage } from 'react-icons/go';
 
-interface OrdersTableProps {
-  orders: Order[];
-}
-
-const OrdersTable = ({ orders }: OrdersTableProps) => {
-  const { push } = useRouter();
-
-  return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th className={'p-3'}>Order ID</th>
-          <th className={'p-3'}>Order Date</th>
-          <th className={'p-3'}>Delivery Date</th>
-          <th className={'p-3'}>Order Status</th>
-          <th className={'p-3'}>Order Total</th>
-        </tr>
-      </thead>
-      <tbody className={' font-semibold'}>
-        {orders.length === 0 ? (
-          <tr>
-            <td colSpan={5} className={'h-32 text-center'}>
-              <h1 className={'text-2xl font-bold'}>No orders yet</h1>
-            </td>
-          </tr>
-        ) : (
-          <>
-            {orders.map((order) => (
-              <tr
-                key={order.id}
-                onClick={() => push(`${Route.ORDERS}/${order.id}`)}
-              >
-                <td className={'p-3'}>{shortenString(order.id, 15)}</td>
-                <td className={'p-3'}>{formatDateString(order.createdAt)}</td>
-                <td className={'p-3'}>
-                  {formatDateString(order.deliveryDate)}
-                </td>
-                <td className={'flex justify-center p-3'}>
-                  <OrderStatusBadge status={order.status} />
-                </td>
-                <td className={'p-3'}>{formatPrice(order.cost)}</td>
-              </tr>
-            ))}
-          </>
-        )}
-      </tbody>
-    </table>
-  );
+type TableData = {
+  id: string;
+  createdAt: string;
+  deliveredAt: string;
+  status: ReactNode;
+  cost: string;
 };
 
+const OrdersTable = () => {
+  const { push } = useRouter();
+  const { urlQuery } = useQueryParams();
+
+  const { data: orders, isLoading } = useFilterOrders(
+    urlQuery.status as OrderStatus,
+  );
+
+  const tableData: TableData[] =
+    orders?.map((order) => ({
+      id: order.id,
+      createdAt: formatDateString(order.createdAt) ?? '/',
+      deliveredAt: formatDateString(order.deliveredAt) ?? '/',
+      status: (
+        <div className={'flex w-full  justify-center'}>
+          <OrderStatusBadge status={order.status} />
+        </div>
+      ),
+      cost: formatPrice(order.cost),
+    })) ?? [];
+
+  const headers: TableHeader<TableData>[] = [
+    {
+      label: 'Order ID',
+      key: 'id',
+    },
+    {
+      label: 'Order Date',
+      key: 'createdAt',
+    },
+    {
+      label: 'Delivery Date',
+      key: 'deliveredAt',
+    },
+    {
+      label: 'Order Status',
+      key: 'status',
+    },
+    {
+      label: 'Order Total',
+      key: 'cost',
+    },
+  ];
+
+  const handleRowClick = (item: TableData) => {
+    push(`${Route.ORDERS}/${item.id}`);
+  };
+
+  return (
+    <Table
+      data={tableData}
+      headers={headers}
+      onRowClick={handleRowClick}
+      isLoading={isLoading}
+      emptyStateComponent={
+        <div className={'flex flex-col items-center gap-2'}>
+          <GoPackage size={48} />
+          <h1 className={'text-2xl font-bold'}>No orders yet</h1>
+        </div>
+      }
+      loadingStateComponent={<Loading />}
+    />
+  );
+};
 export default OrdersTable;

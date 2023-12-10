@@ -5,6 +5,7 @@ import { Route } from '@/constants/routes';
 import Button from '@/components/ui/Button';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const Finish = () => {
   const router = useRouter();
@@ -28,10 +29,10 @@ const Finish = () => {
           ]}
         />
       </div>
-      <div className={'mt-40 flex w-fit flex-col items-center gap-2'}>
-        <div className={'my-1 text-6xl'}>🍭</div>
+      <div className={'mt-30 flex w-fit flex-col items-center gap-2'}>
+        <Image src={'/logo.svg'} alt={''} width={300} height={300} />
         <h1 className={'text-3xl font-bold'}>CONGRATULATIONS!</h1>
-        <p>Your order is on your way.</p>
+        <p className={'font-semibold'}>Your order is on your way.</p>
         <Button onClick={() => router.push(Route.HOME)}>BACK TO SHOP</Button>
       </div>
     </div>

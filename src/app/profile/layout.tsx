@@ -4,30 +4,22 @@ import { Route } from '@/constants/routes';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className={'flex min-h-screen flex-row p-[5rem] px-0 pb-0'}>
-      <aside
-        className={
-          'flex-2 flex w-[300px] flex-col border-2 border-t-0 border-black bg-white font-bold'
-        }
-      >
+    <div className="flex min-h-screen">
+      <aside className="fixed bottom-0 left-0 top-20 flex w-72 flex-col overflow-y-auto border-2 border-t-0 border-black bg-white font-bold">
         <Link
           href={Route.PROFILE}
-          className={
-            'block w-full border-b-2 border-t-0 border-black bg-primary px-5 py-4 hover:bg-[#a36ec4]'
-          }
+          className="block w-full border-b-2 border-t-0 border-black bg-primary px-5 py-4 hover:bg-primary-dark"
         >
           PROFILE
         </Link>
         <Link
           href={Route.ORDERS}
-          className={
-            'block w-full border-b-2 border-black bg-primary px-5 py-4 hover:bg-[#a36ec4]'
-          }
+          className="block w-full border-b-2 border-t-0 border-black bg-primary px-5 py-4 hover:bg-primary-dark"
         >
           ORDERS
         </Link>
       </aside>
-      <main className="flex w-full flex-1 flex-col items-center p-10 pb-10">
+      <main className="ml-72 flex flex-1 flex-col items-center overflow-y-auto px-10 pb-20 pt-32">
         {children}
       </main>
     </div>

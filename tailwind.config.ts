@@ -1,6 +1,4 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
+const config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
@@ -8,6 +6,8 @@ const config: Config = {
         primary: '#bc95d4',
         secondary: '#C9DCD8',
         'primary-dark': '#a36ec4',
+        tertiary: '#E91D6D',
+        'tertiary-dark': '#a20f4d',
       },
       animation: {
         marquee: 'marquee 15s linear infinite',
@@ -32,4 +32,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;

@@ -20,7 +20,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Providers>
           <div className={'flex min-h-screen flex-col bg-secondary'}>
             <Navbar />
-            <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Suspense
+              fallback={
+                <main className="flex min-h-screen flex-col items-center p-24 pb-10">
+                  <Loading />
+                </main>
+              }
+            >
+              {children}
+            </Suspense>
           </div>
         </Providers>
       </body>

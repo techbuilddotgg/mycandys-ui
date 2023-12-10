@@ -4,6 +4,7 @@ import { User } from '@/models/user';
 export const SHIPPING_COST = 5;
 
 export enum OrderStatus {
+  All = 'all',
   Pending = 'pending',
   Shipped = 'shipped',
   Delivered = 'delivered',
@@ -13,12 +14,14 @@ export const OrderStatusLabels = {
   [OrderStatus.Pending]: 'Pending',
   [OrderStatus.Delivered]: 'Delivered',
   [OrderStatus.Shipped]: 'Shipped',
+  [OrderStatus.All]: 'All',
 };
 
 export const OrderStatusColors = {
   [OrderStatus.Pending]: 'bg-yellow-400 hover:bg-yellow-500',
   [OrderStatus.Delivered]: 'bg-green-400 hover:bg-green-500',
   [OrderStatus.Shipped]: 'bg-blue-400 hover:bg-blue-500',
+  [OrderStatus.All]: 'bg-primary hover:bg-primary-dark',
 };
 
 export const getOrderStatusColor = (status: OrderStatus) => {
@@ -31,7 +34,7 @@ export const getOrderStatusLabel = (status: OrderStatus) => {
 
 export interface Order {
   id: string;
-  deliveryDate: string;
+  deliveredAt: string;
   address: string;
   cost: number;
   status: OrderStatus;
@@ -76,6 +79,7 @@ export const createOrderData = (
       imgUrl: item.imgUrl,
       name: item.name,
       price: item.price,
+      quantity: item.quantity,
     })),
     userId: user.id,
     cartId: cartId,

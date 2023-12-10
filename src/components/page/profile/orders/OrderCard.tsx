@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Order } from '@/models/order';
+import { Order, SHIPPING_COST } from '@/models/order';
 import { formatPrice } from '@/utils/price';
 import OrderStatusBadge from '@/components/page/profile/orders/OrderStatusBadge';
 import Image from 'next/image';
@@ -43,7 +43,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
         <h2 className={'text-lg font-bold'}>INFO</h2>
 
         <OrderCardRow
-          label={'Order Date'}
+          label={'Created At'}
           value={formatDateString(order.createdAt)}
         />
         <OrderCardRow
@@ -51,14 +51,18 @@ const OrderCard = ({ order }: OrderCardProps) => {
           value={formatDateString(order.expectedDeliveryDate, { time: false })}
         />
         <OrderCardRow
-          label={'Delivery Date'}
-          value={formatDateString(order.deliveryDate)}
+          label={'Delivered At'}
+          value={formatDateString(order.deliveredAt)}
         />
         <OrderCardRow
-          label={'Order Status'}
+          label={'Status'}
           value={<OrderStatusBadge status={order.status} />}
         />
-        <OrderCardRow label={'Order Total'} value={formatPrice(order.cost)} />
+        <OrderCardRow
+          label={'Shipping Cost'}
+          value={formatPrice(SHIPPING_COST)}
+        />
+        <OrderCardRow label={'Total'} value={formatPrice(order.cost)} />
         <h2 className={'mt-2 text-lg font-bold'}>ITEMS</h2>
         {order.items.map((item, index) => (
           <div
@@ -73,7 +77,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
               <div className={'text-lg font-semibold'}>{item.name}</div>
             </div>
             <div className={'text-lg font-semibold'}>
-              {formatPrice(item.price)}
+              {`${item.quantity} X ${formatPrice(item.price)}`}
             </div>
           </div>
         ))}
