@@ -17,3 +17,22 @@ export const getOrdersByUserId = async (userId: string) => {
   )) as AxiosResponse<Order[]>;
   return data;
 };
+
+// TODO: getOrdersByUserIdAndStatus on backend
+export const getOrdersByUserIdAndStatus = async (
+  userId: string,
+  status: string,
+) => {
+  const { data } = (await api.get(
+    `${APIRoute.ORDERS}/user/${userId}/${status}`,
+  )) as AxiosResponse<Order[]>;
+  return data;
+};
+
+export const ORDER_BY_ID_QUERY_KEY = 'orderById';
+export const getOrderById = async (orderId: string) => {
+  const { data } = (await api.get(
+    `${APIRoute.ORDERS}/${orderId}`,
+  )) as AxiosResponse<Order>;
+  return data;
+};

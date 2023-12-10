@@ -6,6 +6,7 @@ export enum Route {
   FINISH = '/cart/checkout/finish',
   PROFILE = '/profile',
   ORDERS = '/profile/orders',
+  ORDER = '/profile/orders',
 }
 
 export const protectedRoutes: Route[] = [Route.PROFILE, Route.ORDERS];

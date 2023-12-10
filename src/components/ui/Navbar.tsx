@@ -26,7 +26,7 @@ export default function Navbar() {
 
   return (
     <nav className="m500:h-16 fixed left-0 top-0 z-10 mx-auto flex h-20 w-full items-center border-b-4 border-black bg-white px-5">
-      <div className={'mx-auto flex w-[1300px] max-w-full items-center'}>
+      <div className={'mx-auto flex w-[1800px] max-w-full items-center'}>
         <Link href={Route.HOME} className={'m500:text-xl text-3xl font-bold'}>
           MY CANDY&apos;S
         </Link>

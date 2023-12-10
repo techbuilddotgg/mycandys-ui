@@ -36,7 +36,8 @@ export interface Order {
   cost: number;
   status: OrderStatus;
   createdAt: string;
-  cart: Item[];
+  items: Item[];
+  expectedDeliveryDate: string;
 }
 
 export interface CreateOrderData {
