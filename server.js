@@ -1,7 +1,7 @@
 const express = require('express');
 const next = require('next');
 
-const port = 3000;
+const port = process.env.PORT;
 const dev = process.env.NODE_ENV !== 'production';
 
 // creating the app either in production or dev mode

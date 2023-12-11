@@ -11,5 +11,5 @@ COPY . .
 RUN npm run build
 
 # Izpostavi port
-EXPOSE 3000
+EXPOSE ${PORT}
 CMD ["node", "server.js"]
