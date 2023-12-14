@@ -1,3 +1,4 @@
+'use client';
 import React, { MutableRefObject, useRef } from 'react';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';

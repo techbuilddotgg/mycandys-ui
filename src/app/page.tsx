@@ -5,7 +5,6 @@ import ProductFilter from '@/components/page/home/ProductFilter';
 import {
   dehydrate,
   HydrationBoundary,
-  QueryClient,
 } from '@tanstack/react-query';
 import {
   CATEGORY_QUERY_KEY,
@@ -20,6 +19,7 @@ import {
   getSearchProducts,
 } from '@/api/products';
 import { headers } from 'next/headers';
+import getQueryClient from '@/utils/getQueryClient';
 
 const carouselItems = [
   'Lollipops',
@@ -34,8 +34,11 @@ const carouselItems = [
   'Snickers',
 ];
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function Home() {
-  const queryClient = new QueryClient();
+  const queryClient = getQueryClient();
 
   const headerList = headers();
   const url = new URL(headerList.get('x-url') as string);
@@ -70,19 +73,19 @@ export default async function Home() {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 pb-10">
-      <div className={'my-4 flex w-full'}>
-        <Marquee items={carouselItems} />
-      </div>
-      <div className={'mt-4 flex w-full flex-row gap-10'}>
-        <ProductFilter />
-        <div className={'flex w-full flex-col items-center'}>
-          <SearchForm />
-          <HydrationBoundary state={dehydrate(queryClient)}>
-            <ProductList />
-          </HydrationBoundary>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <main className="flex min-h-screen flex-col items-center p-24 pb-10">
+        <div className={'my-4 flex w-full'}>
+          <Marquee items={carouselItems} />
         </div>
-      </div>
-    </main>
+        <div className={'mt-4 flex w-full flex-row gap-10'}>
+          <ProductFilter />
+          <div className={'flex w-full flex-col items-center'}>
+            <SearchForm />
+            <ProductList />
+          </div>
+        </div>
+      </main>
+    </HydrationBoundary>
   );
 }

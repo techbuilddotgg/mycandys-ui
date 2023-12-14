@@ -1,3 +1,4 @@
+'use client';
 import { formatPrice } from '@/utils/price';
 import { useCart } from '@/hooks/useCart';
 import { useCartContext } from '@/components/providers/CartProvider';

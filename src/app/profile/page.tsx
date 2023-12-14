@@ -6,11 +6,15 @@ import {
 } from '@tanstack/react-query';
 import { getUser } from '@/api/user';
 import { USER_QUERY_KEY } from '@/hooks/useUser';
+import getQueryClient from '@/utils/getQueryClient';
+
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 
 export default async function Profile() {
-  const queryClient = new QueryClient();
+  const queryClient =  getQueryClient();
 
   await queryClient.prefetchQuery({
     queryKey: [USER_QUERY_KEY],
