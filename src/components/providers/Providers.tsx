@@ -28,6 +28,7 @@ export default function Providers({ children }: { children: ReactNode }) {
             position={'bottom-right'}
             toastOptions={{
               unstyled: true,
+              className: "absolute right-0",
               classNames: {
                 toast:
                   'flex items-center rounded-md gap-2 border-2 border-black bg-gray-200 p-2 px-8 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
