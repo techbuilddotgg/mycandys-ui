@@ -17,7 +17,7 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   const { cartId, update } = useCartContext();
 
-  const { mutateAsync } = useAddToCart({
+  const { mutateAsync, isPending } = useAddToCart({
     onSuccess: (cart) => {
       update(cart._id);
     },
@@ -63,7 +63,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         )}
       </div>
-      <Button onClick={addToCart} className={'mt-2 w-full bg-emerald-300'}>
+      <Button disabled={isPending} onClick={addToCart} className={'mt-2 w-full bg-emerald-300 disabled:opacity-50'}>
         ADD TO CART
       </Button>
     </Card>
