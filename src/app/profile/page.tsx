@@ -1,25 +1,7 @@
 import ProfileForm from '@/components/page/profile/ProfileForm';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
-import { getUser } from '@/api/user';
-import { USER_QUERY_KEY } from '@/hooks/useUser';
-import getQueryClient from '@/utils/getQueryClient';
 
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-
-export default async function Profile() {
-  const queryClient =  getQueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: [USER_QUERY_KEY],
-    queryFn: getUser,
-  });
+export default function Profile() {
 
   return (
     <div className={'flex w-full flex-col items-center'}>
@@ -30,9 +12,7 @@ export default async function Profile() {
         }}
         className="m-auto my-2 h-16 w-16 rounded-full border-2 border-black bg-cover bg-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none"
       />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ProfileForm />
-      </HydrationBoundary>
+      <ProfileForm />
     </div>
   );
 }
