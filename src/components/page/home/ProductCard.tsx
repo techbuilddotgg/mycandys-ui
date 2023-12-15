@@ -1,5 +1,5 @@
 'use client';
-import { useAddToCart } from '@/hooks/useCart';
+import { CART_QUERY_KEY, useAddToCart } from '@/hooks/useCart';
 import React from 'react';
 import Image from 'next/image';
 import { Product } from '@/models/product';
@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button';
 import { classnames } from '@/utils/classnames';
 import { useCartContext } from '@/components/providers/CartProvider';
 import { toast } from 'sonner';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface ProductCardProps {
   product: Product;
@@ -16,9 +17,13 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { cartId, update } = useCartContext();
+  const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useAddToCart({
-    onSuccess: (cart) => {
+    onSuccess: async (cart) => {
+      await queryClient.invalidateQueries({
+        queryKey: [CART_QUERY_KEY, cart._id],
+      });
       update(cart._id);
     },
   });

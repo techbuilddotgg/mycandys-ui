@@ -14,6 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           width={700}
           height={700}
           layout="responsive"
+          priority={true}
         />
         <div className={'relative z-10 w-full'}>{children}</div>
         <Image
@@ -23,6 +24,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           width={700}
           height={700}
           layout="responsive"
+          priority={true}
         />
       </div>
     </main>
