@@ -7,7 +7,7 @@ const config = {
         secondary: '#C9DCD8',
         'primary-dark': '#a36ec4',
         tertiary: '#E91D6D',
-        'tertiary-dark': '#a20f4d',
+        'tertiary-dark': '#d31567',
       },
       animation: {
         marquee: 'marquee 15s linear infinite',
