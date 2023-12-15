@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Route } from '@/constants/routes';
 import { useSession } from '@/components/providers/SessionProvider';
 import { getSession, Session } from '@/utils/session';
+import { toast } from 'sonner';
 
 interface SignInFormData {
   email: string;
@@ -34,8 +35,14 @@ const SignInForm = () => {
     },
   });
 
-  const onSubmit = async (data: SignInFormData) => {
-    await mutateAsync(data);
+  const onSubmit = (data: SignInFormData) => {
+
+    toast.promise(mutateAsync(data), {
+      loading: 'Signing in...',
+      success: 'Signed in!',
+      error: 'Error signing in!',
+    });
+
   };
 
   return (
