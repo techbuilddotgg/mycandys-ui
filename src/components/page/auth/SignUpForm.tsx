@@ -5,6 +5,7 @@ import Button from '@/components/ui/Button';
 import { useRegisterUser } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { Route } from '@/constants/routes';
+import { toast } from 'sonner';
 
 interface SignUpFormData {
   email: string;
@@ -24,7 +25,7 @@ const SignUpForm = () => {
     defaultValues,
   });
 
-  const { mutateAsync } = useRegisterUser({
+  const { mutateAsync, isPending } = useRegisterUser({
     onSuccess: () => {
       reset();
       push(Route.LOGIN);
@@ -32,10 +33,15 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (data: SignUpFormData) => {
-    await mutateAsync({
-      email: data.email,
-      password: data.password,
-    });
+    toast.promise(mutateAsync({
+        email: data.email,
+        password: data.password,
+      }), {
+        loading: 'Signing up...',
+        success: 'Signed up!',
+        error: 'Error signing up!',
+      },
+    );
   };
 
   return (
@@ -56,7 +62,7 @@ const SignUpForm = () => {
         placeholder={'Confirm Password'}
         type={'password'}
       />
-      <Button className={'bg-tertiary text-white'}>Sign Up</Button>
+      <Button disabled={isPending} className={'bg-tertiary text-white disabled:opacity-50'}>Sign Up</Button>
     </form>
   );
 };

@@ -28,7 +28,7 @@ const SignInForm = () => {
 
   const { update } = useSession();
 
-  const { mutateAsync } = useLogin({
+  const { mutateAsync, isPending } = useLogin({
     onSuccess: () => {
       push(Route.HOME);
       update(getSession() as Session);
@@ -58,7 +58,7 @@ const SignInForm = () => {
         placeholder={'Password'}
         type={'password'}
       />
-      <Button className={'bg-tertiary text-white'}>Sign In</Button>
+      <Button disabled={isPending} className={'bg-tertiary text-white disabled:opacity-50'}>Sign In</Button>
     </form>
   );
 };
